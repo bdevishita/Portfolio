@@ -48,7 +48,7 @@ export default function Projects() {
     ];
 
     return (
-        <section className="relative z-20 w-full bg-background pb-40 pt-12 px-6 md:px-24">
+        <section id="projects" className="scroll-mt-16 relative z-20 w-full bg-background pb-40 pt-12 px-6 md:px-24">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-12">
                     <div>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Contact() {
     return (
-        <section className="relative z-20 w-full bg-[#0a0a0a] overflow-hidden rounded-t-[3rem] mt-[-2rem] border-t border-white/10 shadow-[0_-20px_40px_rgba(0,0,0,0.5)]">
+        <section id="contact" className="relative z-20 w-full bg-[#0a0a0a] overflow-hidden rounded-t-[3rem] mt-[-2rem] border-t border-white/10 shadow-[0_-20px_40px_rgba(0,0,0,0.5)]">
 
             {/* Massive Marquee */}
             <div className="relative flex overflow-x-hidden border-b border-white/5 bg-[#121212] py-8">
