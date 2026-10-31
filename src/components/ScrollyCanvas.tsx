@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 export default function ScrollyCanvas({
@@ -10,7 +10,8 @@ export default function ScrollyCanvas({
 }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [images, setImages] = useState<HTMLImageElement[]>([]);
+    // Held in a ref (not state) so loading frames never triggers a re-render loop
+    const imagesRef = useRef<HTMLImageElement[]>([]);
     const currentIndexRef = useRef(0);
 
     // Map scroll progress over the container
@@ -22,7 +23,7 @@ export default function ScrollyCanvas({
     // Calculate the current frame smoothly
     const currentFrame = useTransform(scrollYProgress, [0, 1], [0, numFrames - 1]);
 
-    const drawFrame = useCallback((frameIndex: number, imgs: HTMLImageElement[] = images) => {
+    const drawFrame = useCallback((frameIndex: number, imgs: HTMLImageElement[] = imagesRef.current) => {
         if (imgs.length === 0 || !canvasRef.current) return;
 
         const index = Math.max(0, Math.min(imgs.length - 1, Math.floor(frameIndex)));
@@ -42,7 +43,7 @@ export default function ScrollyCanvas({
         }
 
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    }, [images]);
+    }, []);
 
     // Preload all high-res sequence images
     useEffect(() => {
@@ -65,7 +66,7 @@ export default function ScrollyCanvas({
                 }
             };
         }
-        setImages(loadedImages);
+        imagesRef.current = loadedImages;
     }, [numFrames, drawFrame]);
 
 
