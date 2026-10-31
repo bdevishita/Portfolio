@@ -40,12 +40,32 @@
 .lab .pill-slide span{display:flex;align-items:center;justify-content:center;height:1.5em}
 @keyframes lab-slide{0%,20%{transform:translateY(0)}25%,45%{transform:translateY(-1.5em)}50%,70%{transform:translateY(-3em)}75%,95%{transform:translateY(-4.5em)}100%{transform:translateY(-4.5em)}}
 
+/* Project page (/labs/<slug>) */
+.lab .detail-head{padding:40px 0 40px;display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.lab .crumb{font-family:var(--sans);font-size:14px;color:var(--muted);transition:color .2s}
+.lab .crumb:hover{color:var(--blue)}
+.lab .crumb:focus-visible,.lab .cta:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:999px}
+.lab .tagline{font-family:var(--sans);font-size:clamp(16px,2vw,20px);line-height:1.5;color:var(--muted);max-width:620px}
+.lab .cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--cream);padding:14px 22px;border-radius:999px;font-family:var(--sans);font-size:14px;transition:background .2s}
+.lab .cta:hover{background:var(--blue)}
+.lab .hero .media{transition:none}
+.lab .facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:40px;padding:24px 0;border-top:1px solid rgba(22,35,58,.12);border-bottom:1px solid rgba(22,35,58,.12);font-family:var(--sans)}
+.lab .facts dt{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.lab .facts dd{font-size:15px}
+.lab .story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:16px 48px;padding:48px 0;border-bottom:1px solid rgba(22,35,58,.12)}
+.lab .story h2{font-weight:400;font-size:clamp(24px,3vw,32px);letter-spacing:-.02em;line-height:1.15}
+.lab .story-body{display:flex;flex-direction:column;gap:16px;font-family:var(--sans);font-size:16px;line-height:1.65;max-width:62ch}
+.lab .story-body ul{list-style:disc;padding-left:20px;display:flex;flex-direction:column;gap:10px}
+.lab .story-body li::marker{color:var(--blue)}
+.lab .stories{padding-bottom:40px}
+.lab .story:last-child{border-bottom:0}
+
 /* Footer */
 .lab footer{border-top:1px solid rgba(22,35,58,.12);padding:36px 0 56px;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;font-family:var(--sans);font-size:13px;color:var(--muted)}
 
 /* Responsive */
 @media(max-width:900px){.lab .gallery{gap:40px}}
-@media(max-width:700px){.lab .media{aspect-ratio:4/3}.lab .dg{grid-template-columns:repeat(10,1fr)}}
+@media(max-width:700px){.lab .media{aspect-ratio:4/3}.lab .dg{grid-template-columns:repeat(10,1fr)}.lab .facts{grid-template-columns:repeat(2,minmax(0,1fr))}.lab .story{grid-template-columns:minmax(0,1fr);padding:36px 0}}
 @media(max-width:560px){.lab .wrap{padding:0 20px}.lab nav ul{gap:18px}.lab .pill{padding:8px 20px}.lab .cap{flex-direction:column;gap:2px}}
 
 /* Reduced motion: stop animating, but keep the card meaningful (a filled streak and the first brief) */
