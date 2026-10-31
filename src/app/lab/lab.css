@@ -1,26 +1,31 @@
-/* Lab page styles, scoped under .lab so nothing leaks into the dark main site */
+/* Lab page styles. Every rule is scoped under .lab so the dark main site is unaffected. */
 .lab{--blue:#2d6dc3;--cream:#f4efe6;--ink:#16233a;--muted:#6b7589;--serif:"PP Writer","Iowan Old Style",Georgia,serif;--sans:var(--font-inter),system-ui,-apple-system,sans-serif;
   min-height:100vh;background:var(--cream);color:var(--ink);font-family:var(--serif);-webkit-font-smoothing:antialiased;letter-spacing:normal}
 .lab *{box-sizing:border-box;margin:0}
 .lab a{color:inherit;text-decoration:none}
 .lab .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.lab .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
+/* Nav */
 .lab nav{display:flex;justify-content:space-between;align-items:center;padding:28px 0;font-family:var(--sans);font-size:14px}
 .lab .logo{font-family:var(--serif);font-size:20px;color:var(--blue)}
 .lab nav ul{display:flex;gap:28px;list-style:none;padding:0}
 .lab nav li a{color:var(--muted);transition:color .2s}
 .lab nav li a:hover,.lab nav li a.on{color:var(--ink)}
+.lab nav a:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:4px}
 
+/* Intro */
 .lab .intro{padding:56px 0 48px;display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
-.lab h1{font-weight:400;font-size:clamp(44px,7vw,80px);letter-spacing:-.03em;line-height:1}
+.lab h1{font-weight:400;font-size:clamp(44px,7vw,80px);letter-spacing:-.03em;line-height:1;text-wrap:balance}
 .lab .intro p{font-family:var(--sans);font-size:15px;color:var(--muted);max-width:340px;line-height:1.5}
 
-/* Gallery: media first, caption underneath (title / category / year) */
-.lab .gallery{display:grid;grid-template-columns:1fr;gap:48px 28px;padding-bottom:88px}
-.lab .item{display:block}
-.lab .media{aspect-ratio:16/6;border-radius:22px;overflow:hidden;display:grid;place-items:center;position:relative;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s}
-.lab .item:hover .media{transform:scale(.99);box-shadow:inset 0 0 0 1px rgba(22,35,58,.08)}
-.lab .cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 4px 0;font-family:var(--sans);font-size:14px}
+/* Experiments: always one column at every width */
+.lab .gallery{list-style:none;padding:0 0 88px;display:grid;grid-template-columns:minmax(0,1fr);gap:48px}
+.lab .item{display:block;position:relative}
+.lab .item:focus-visible{outline:2px solid var(--blue);outline-offset:6px;border-radius:26px}
+.lab .media{aspect-ratio:16/6;max-width:100%;border-radius:22px;overflow:hidden;display:grid;place-items:center;position:relative;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s}
+.lab .item:hover .media,.lab .item:focus-visible .media{transform:scale(.99);box-shadow:inset 0 0 0 1px rgba(22,35,58,.08)}
+.lab .cap{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;padding:14px 4px 0;font-family:var(--sans);font-size:14px}
 .lab .cap b{font-weight:500}
 .lab .cap span{color:var(--muted);font-size:13px}
 
@@ -29,14 +34,22 @@
 .lab .dg{display:grid;grid-template-columns:repeat(25,1fr);gap:5px;width:100%}
 .lab .dg i{aspect-ratio:1;border-radius:4px;background:rgba(255,255,255,.18);animation:lab-fill 6s infinite both}
 @keyframes lab-fill{0%,8%{background:rgba(255,255,255,.18)}16%,88%{background:#fff}100%{background:rgba(255,255,255,.18)}}
-.lab .pill{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;color:var(--blue);border-radius:999px;padding:10px 32px;font-size:clamp(18px,2.6vw,32px);letter-spacing:-.02em;white-space:nowrap;box-shadow:0 10px 30px -10px rgba(0,0,0,.35)}
+.lab .pill{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:92%;background:#fff;color:var(--blue);border-radius:999px;padding:10px 32px;font-size:clamp(18px,2.6vw,32px);letter-spacing:-.02em;white-space:nowrap;box-shadow:0 10px 30px -10px rgba(0,0,0,.35)}
 .lab .pill-slide{height:1.5em;overflow:hidden}
 .lab .pill-slide div{animation:lab-slide 12s infinite cubic-bezier(.7,0,.2,1)}
 .lab .pill-slide span{display:flex;align-items:center;justify-content:center;height:1.5em}
 @keyframes lab-slide{0%,20%{transform:translateY(0)}25%,45%{transform:translateY(-1.5em)}50%,70%{transform:translateY(-3em)}75%,95%{transform:translateY(-4.5em)}100%{transform:translateY(-4.5em)}}
 
+/* Footer */
 .lab footer{border-top:1px solid rgba(22,35,58,.12);padding:36px 0 56px;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;font-family:var(--sans);font-size:13px;color:var(--muted)}
 
+/* Responsive */
+@media(max-width:900px){.lab .gallery{gap:40px}}
 @media(max-width:700px){.lab .media{aspect-ratio:4/3}.lab .dg{grid-template-columns:repeat(10,1fr)}}
-@media(max-width:560px){.lab .wrap{padding:0 20px}.lab nav ul{gap:18px}.lab .cap{flex-direction:column;gap:2px}}
-@media(prefers-reduced-motion:reduce){.lab *{animation:none!important;transition:none!important}}
+@media(max-width:560px){.lab .wrap{padding:0 20px}.lab nav ul{gap:18px}.lab .pill{padding:8px 20px}.lab .cap{flex-direction:column;gap:2px}}
+
+/* Reduced motion: stop animating, but keep the card meaningful (a filled streak and the first brief) */
+@media(prefers-reduced-motion:reduce){
+  .lab *{animation:none!important;transition:none!important}
+  .lab .dg i:nth-child(-n+37){background:#fff}
+}
