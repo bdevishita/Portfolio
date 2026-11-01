@@ -70,6 +70,7 @@ export default function ExperimentPage({ params }: Props) {
                                     </ul>
                                 )}
                             </div>
+                            {s.visual && <div className="story-visual">{s.visual}</div>}
                         </section>
                     ))}
                 </div>
