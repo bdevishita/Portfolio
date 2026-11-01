@@ -32,10 +32,17 @@ export default function ExperimentPage({ params }: Props) {
                     </Link>
                     <h1>{e.title}</h1>
                     <p className="tagline">{e.tagline}</p>
-                    <a className="cta" href={e.liveUrl} target="_blank" rel="noopener noreferrer">
-                        {e.liveLabel} <span aria-hidden="true">↗</span>
-                        <span className="sr-only"> (opens in a new tab)</span>
-                    </a>
+                    {e.liveUrl.startsWith("/") ? (
+                        // Plain anchor on purpose: this path is proxied to another app, so it needs a full page load
+                        <a className="cta" href={e.liveUrl}>
+                            {e.liveLabel} <span aria-hidden="true">→</span>
+                        </a>
+                    ) : (
+                        <a className="cta" href={e.liveUrl} target="_blank" rel="noopener noreferrer">
+                            {e.liveLabel} <span aria-hidden="true">↗</span>
+                            <span className="sr-only"> (opens in a new tab)</span>
+                        </a>
+                    )}
                 </header>
 
                 <div className="hero">{e.visual}</div>

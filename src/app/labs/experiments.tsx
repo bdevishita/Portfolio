@@ -14,7 +14,7 @@ export type Experiment = {
     meta: string;
     /** One-sentence pitch shown under the title on the project page */
     tagline: string;
-    /** Where the working app lives */
+    /** Where the working app lives. A path starting with "/" opens on this site in the same tab */
     liveUrl: string;
     liveLabel: string;
     facts: { label: string; value: string }[];
@@ -56,7 +56,7 @@ export const EXPERIMENTS: Experiment[] = [
         title: "Daily Brief",
         meta: "Topic generator + 100 Days of AI · 2026",
         tagline: "A random design brief whenever you need one, and a 100-day challenge to build something from each.",
-        liveUrl: "https://design-topic-generator.vercel.app",
+        liveUrl: "/labs/daily-brief/live/",
         liveLabel: "Open the live app",
         facts: [
             { label: "Year", value: "2026" },
