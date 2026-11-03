@@ -19,7 +19,7 @@
 .lab h1{font-weight:400;font-size:clamp(44px,7vw,80px);letter-spacing:-.03em;line-height:1;text-wrap:balance}
 .lab .intro p{font-family:var(--sans);font-size:15px;color:var(--muted);max-width:340px;line-height:1.5}
 
-/* Experiments: two side by side, one column on phones */
+/* Experiments: two side by side at every width */
 .lab .gallery{list-style:none;padding:0 0 88px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 32px}
 .lab .gallery .media{aspect-ratio:4/3}
 .lab .gallery .pill{padding:8px 22px;font-size:clamp(15px,1.9vw,26px)}
@@ -120,7 +120,7 @@
 /* Responsive */
 @media(max-width:900px){.lab .gallery{gap:40px 20px}.lab .dg{grid-template-columns:repeat(20,1fr);gap:4px}}
 @media(max-width:900px){.lab .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}.lab .step:not(:last-child) .step-tile::after{display:none}}
-@media(max-width:700px){.lab .gallery{grid-template-columns:minmax(0,1fr)}.lab .media{aspect-ratio:4/3}.lab .dg{grid-template-columns:repeat(10,1fr)}.lab .facts{grid-template-columns:repeat(2,minmax(0,1fr))}.lab .story{grid-template-columns:minmax(0,1fr);padding:36px 0}}
+@media(max-width:700px){.lab .gallery{gap:28px 12px}.lab .gallery .media{aspect-ratio:1/1;border-radius:16px}.lab .gallery .pill{padding:6px 12px;font-size:11px}.lab .gallery .pr-link{padding:6px 12px;font-size:11px}.lab .gallery .pr-chips{font-size:10px;gap:5px}.lab .gallery .pr-chips span{padding:3px 9px}.lab .gallery .dg{gap:3px}.lab .hero .media{aspect-ratio:4/3}.lab .media{aspect-ratio:4/3}.lab .dg{grid-template-columns:repeat(10,1fr)}.lab .facts{grid-template-columns:repeat(2,minmax(0,1fr))}.lab .story{grid-template-columns:minmax(0,1fr);padding:36px 0}}
 @media(max-width:560px){.lab .steps{grid-template-columns:minmax(0,1fr)}.lab .step-tile{aspect-ratio:2/1}.lab .step svg{max-width:170px}.lab .wrap{padding:0 20px}.lab nav ul{gap:18px}.lab .pill{padding:8px 20px}.lab .cap{flex-direction:column;gap:2px}}
 
 /* Reduced motion: stop animating, but keep the card meaningful (a filled streak and the first brief) */
