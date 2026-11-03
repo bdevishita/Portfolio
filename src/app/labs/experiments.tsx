@@ -49,6 +49,24 @@ function DailyBriefVisual() {
     );
 }
 
+function PresenceVisual() {
+    return (
+        <div className="media m-presence" aria-hidden="true">
+            <div className="pr-tap">
+                <span className="pr-ring" />
+                <span className="pr-ring" />
+                <span className="pr-ring" />
+                <div className="pr-link">presence/ishitadev</div>
+            </div>
+            <div className="pr-chips">
+                <span>Designer</span>
+                <span>Cekura</span>
+                <span>Speaker</span>
+            </div>
+        </div>
+    );
+}
+
 /**
  * To add an experiment, append an entry here. It appears on /labs automatically
  * and gets its own page at /labs/<slug>.
@@ -106,6 +124,54 @@ export const EXPERIMENTS: Experiment[] = [
             },
         ],
         visual: <DailyBriefVisual />,
+    },
+    {
+        slug: "presence",
+        title: "Presence",
+        meta: "Link-first networking profile · 2026",
+        tagline: "One link, tapped from an NFC tag, that shows the right version of me to each person I meet and lets them share their details back.",
+        liveUrl: "https://presence-wine-beta.vercel.app/ishitadev",
+        liveLabel: "Open my Presence page",
+        facts: [
+            { label: "Year", value: "2026" },
+            { label: "Type", value: "Web app" },
+            { label: "Built with", value: "Claude, Next.js, Supabase, Vercel" },
+            { label: "Status", value: "Prototype" },
+        ],
+        sections: [
+            {
+                heading: "What it is",
+                paragraphs: [
+                    "Presence is a link that stands in for a business card. Tap an NFC tag or scan a code and a page opens on the other person's phone. They do not need an app.",
+                    "From that page they can save my contact, connect on LinkedIn, and send their own details back to me.",
+                ],
+            },
+            {
+                heading: "The problem",
+                paragraphs: [
+                    "At events I meet people and then forget to follow up. A business card gives them my details, but it gives me nothing of theirs.",
+                    "Presence turns the exchange around. Whoever opens my link can share their name and LinkedIn or email in a few seconds, so I leave the conversation with their details already saved.",
+                ],
+            },
+            {
+                heading: "How it works",
+                bullets: [
+                    "Personas. I keep different versions of myself, such as designer, Cekura or speaker. Each has its own headline, story, links and its own link to share.",
+                    "I choose what is shared. Each persona decides whether email, phone and LinkedIn go into the contact card.",
+                    "Share yours back. The visitor sends their details to a private People list in my dashboard.",
+                    "Follow-up. Each person gets a prepared LinkedIn message that mentions where we met. I read it, change it and send it myself. Presence never sends messages for me.",
+                    "Login is by email link. There are no passwords to remember.",
+                ],
+            },
+            {
+                heading: "Why I built it",
+                paragraphs: [
+                    "I wanted to see how far a designer with no coding background could take a real product with Claude: from a sketch to accounts, a database and a live site.",
+                    "I started from the moment of meeting someone, and designed the rest around making that moment easy.",
+                ],
+            },
+        ],
+        visual: <PresenceVisual />,
     },
 ];
 
