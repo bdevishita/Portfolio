@@ -19,8 +19,11 @@
 .lab h1{font-weight:400;font-size:clamp(44px,7vw,80px);letter-spacing:-.03em;line-height:1;text-wrap:balance}
 .lab .intro p{font-family:var(--sans);font-size:15px;color:var(--muted);max-width:340px;line-height:1.5}
 
-/* Experiments: always one column at every width */
-.lab .gallery{list-style:none;padding:0 0 88px;display:grid;grid-template-columns:minmax(0,1fr);gap:48px}
+/* Experiments: two side by side, one column on phones */
+.lab .gallery{list-style:none;padding:0 0 88px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 32px}
+.lab .gallery .media{aspect-ratio:4/3}
+.lab .gallery .pill{padding:8px 22px;font-size:clamp(15px,1.9vw,26px)}
+.lab .gallery .pr-link{padding:8px 20px;font-size:clamp(14px,1.8vw,24px)}
 .lab .item{display:block;position:relative}
 .lab .item:focus-visible{outline:2px solid var(--blue);outline-offset:6px;border-radius:26px}
 .lab .media{aspect-ratio:16/6;max-width:100%;border-radius:22px;overflow:hidden;display:grid;place-items:center;position:relative;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s}
@@ -115,9 +118,9 @@
 .lab footer{border-top:1px solid rgba(22,35,58,.12);padding:36px 0 56px;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;font-family:var(--sans);font-size:13px;color:var(--muted)}
 
 /* Responsive */
-@media(max-width:900px){.lab .gallery{gap:40px}}
+@media(max-width:900px){.lab .gallery{gap:40px 20px}.lab .dg{grid-template-columns:repeat(20,1fr);gap:4px}}
 @media(max-width:900px){.lab .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}.lab .step:not(:last-child) .step-tile::after{display:none}}
-@media(max-width:700px){.lab .media{aspect-ratio:4/3}.lab .dg{grid-template-columns:repeat(10,1fr)}.lab .facts{grid-template-columns:repeat(2,minmax(0,1fr))}.lab .story{grid-template-columns:minmax(0,1fr);padding:36px 0}}
+@media(max-width:700px){.lab .gallery{grid-template-columns:minmax(0,1fr)}.lab .media{aspect-ratio:4/3}.lab .dg{grid-template-columns:repeat(10,1fr)}.lab .facts{grid-template-columns:repeat(2,minmax(0,1fr))}.lab .story{grid-template-columns:minmax(0,1fr);padding:36px 0}}
 @media(max-width:560px){.lab .steps{grid-template-columns:minmax(0,1fr)}.lab .step-tile{aspect-ratio:2/1}.lab .step svg{max-width:170px}.lab .wrap{padding:0 20px}.lab nav ul{gap:18px}.lab .pill{padding:8px 20px}.lab .cap{flex-direction:column;gap:2px}}
 
 /* Reduced motion: stop animating, but keep the card meaningful (a filled streak and the first brief) */
