@@ -22,13 +22,9 @@ const WORDS = [
   "Bonjour",
   "Ciao",
   "こんにちは",
-  "Olá",
-  "안녕하세요",
-  "Hallo",
-  "你好",
   "ನಮಸ್ಕಾರ",
 ];
-const WORD_MS = 400; // time each greeting stays on screen
+const WORD_MS = 300; // time each greeting stays on screen
 const BG = "#f4efe6"; // portfolio cream
 const FG = "#2d6dc3"; // portfolio blue
 // Bricolage Grotesque is loaded in app/layout.tsx and exposed as --font-bricolage
