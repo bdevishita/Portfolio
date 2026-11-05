@@ -15,7 +15,7 @@ import { AnimatePresence, motion } from "framer-motion";
  */
 
 const WORDS = ["Hello", "नमस्ते", "Hola", "Bonjour", "Ciao", "ನಮಸ್ಕಾರ"]; // last one is Kannada (Bengaluru)
-const WORD_MS = 850; // time each greeting stays on screen
+const WORD_MS = 550; // time each greeting stays on screen
 const BG = "#f4efe6"; // portfolio cream
 const FG = "#2d6dc3"; // portfolio blue
 // Bricolage Grotesque is loaded in app/layout.tsx and exposed as --font-bricolage
@@ -59,7 +59,7 @@ export default function Preloader() {
               sessionStorage.setItem("preloader-seen", "1");
             } catch {}
             setShow(false);
-          }, 500);
+          }, 300);
         };
         if (document.readyState === "complete") finish();
         else window.addEventListener("load", finish, { once: true });
@@ -80,7 +80,7 @@ export default function Preloader() {
           key="preloader"
           aria-hidden
           initial={{ top: 0 }}
-          exit={{ top: "-100vh", transition: { duration: 1.4, ease: exitEase, delay: 0.2 } }}
+          exit={{ top: "-100vh", transition: { duration: 1.0, ease: exitEase, delay: 0.1 } }}
           style={{
             position: "fixed",
             left: 0,
@@ -109,7 +109,7 @@ export default function Preloader() {
               <motion.path
                 fill={BG}
                 initial={{ d: curved }}
-                exit={{ d: flat, transition: { duration: 1.4, ease: exitEase, delay: 0.2 } }}
+                exit={{ d: flat, transition: { duration: 1.0, ease: exitEase, delay: 0.1 } }}
               />
             </svg>
           )}
