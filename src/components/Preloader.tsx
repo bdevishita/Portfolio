@@ -9,12 +9,25 @@ import { AnimatePresence, motion } from "framer-motion";
  * Usage (app/layout.tsx): render <Preloader /> as the first child of <body>.
  *
  * - Cycles greetings, then a curved curtain lifts away.
- * - Plays once per browser session (sessionStorage).
- * - Respects prefers-reduced-motion.
+ * - Plays on every page load / refresh.
+ * - Skipped only for people who have prefers-reduced-motion turned on.
  * - Locks scroll while loading.
  */
 
-const WORDS = ["Hello", "नमस्ते", "Hola", "Bonjour", "Ciao", "ನಮಸ್ಕಾರ"]; // last one is Kannada (Bengaluru)
+// No language repeats. The last one is Kannada (Bengaluru).
+const WORDS = [
+  "Hello",
+  "नमस्ते",
+  "Hola",
+  "Bonjour",
+  "Ciao",
+  "こんにちは",
+  "Olá",
+  "안녕하세요",
+  "Hallo",
+  "你好",
+  "ನಮಸ್ಕಾರ",
+];
 const WORD_MS = 400; // time each greeting stays on screen
 const BG = "#f4efe6"; // portfolio cream
 const FG = "#2d6dc3"; // portfolio blue
@@ -27,12 +40,8 @@ export default function Preloader() {
   const [dim, setDim] = useState({ w: 0, h: 0 });
 
   useEffect(() => {
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem("preloader-seen") === "1";
-    } catch {}
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (seen || reduce) setShow(false);
+    if (reduce) setShow(false);
     setDim({ w: window.innerWidth, h: window.innerHeight });
   }, []);
 
@@ -55,9 +64,6 @@ export default function Preloader() {
         clearInterval(timer);
         const finish = () => {
           setTimeout(() => {
-            try {
-              sessionStorage.setItem("preloader-seen", "1");
-            } catch {}
             setShow(false);
           }, 300);
         };
