@@ -15,7 +15,7 @@ import { AnimatePresence, motion } from "framer-motion";
  */
 
 const WORDS = ["Hello", "नमस्ते", "Hola", "Bonjour", "Ciao", "ನಮಸ್ಕಾರ"]; // last one is Kannada (Bengaluru)
-const WORD_MS = 550; // time each greeting stays on screen
+const WORD_MS = 500; // time each greeting stays on screen
 const BG = "#f4efe6"; // portfolio cream
 const FG = "#2d6dc3"; // portfolio blue
 // Bricolage Grotesque is loaded in app/layout.tsx and exposed as --font-bricolage
