@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Preloader from "@/components/Preloader";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage" });
 
 export const metadata: Metadata = {
     title: "Ishita Dev — UI/UX Designer",
@@ -17,7 +19,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="dark">
-            <body className={cn(inter.variable, "font-sans min-h-screen bg-background text-foreground tracking-tight")}>
+            <body className={cn(inter.variable, bricolage.variable, "font-sans min-h-screen bg-background text-foreground tracking-tight")}>
+                <Preloader />
                 {children}
             </body>
         </html>
