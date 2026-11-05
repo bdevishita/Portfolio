@@ -14,8 +14,8 @@ import { AnimatePresence, motion } from "framer-motion";
  * - Locks scroll while loading.
  */
 
-const WORDS = ["Hello", "नमस्ते", "Hola", "Bonjour", "Ciao", "Hello"];
-const WORD_MS = 450; // time each greeting stays on screen
+const WORDS = ["Hello", "नमस्ते", "Hola", "Bonjour", "Ciao", "ನಮಸ್ಕಾರ"]; // last one is Kannada (Bengaluru)
+const WORD_MS = 850; // time each greeting stays on screen
 const BG = "#f4efe6"; // portfolio cream
 const FG = "#2d6dc3"; // portfolio blue
 // Bricolage Grotesque is loaded in app/layout.tsx and exposed as --font-bricolage
@@ -59,7 +59,7 @@ export default function Preloader() {
               sessionStorage.setItem("preloader-seen", "1");
             } catch {}
             setShow(false);
-          }, 250);
+          }, 500);
         };
         if (document.readyState === "complete") finish();
         else window.addEventListener("load", finish, { once: true });
@@ -80,7 +80,7 @@ export default function Preloader() {
           key="preloader"
           aria-hidden
           initial={{ top: 0 }}
-          exit={{ top: "-100vh", transition: { duration: 0.9, ease: exitEase, delay: 0.15 } }}
+          exit={{ top: "-100vh", transition: { duration: 1.4, ease: exitEase, delay: 0.2 } }}
           style={{
             position: "fixed",
             left: 0,
@@ -109,19 +109,19 @@ export default function Preloader() {
               <motion.path
                 fill={BG}
                 initial={{ d: curved }}
-                exit={{ d: flat, transition: { duration: 0.9, ease: exitEase, delay: 0.15 } }}
+                exit={{ d: flat, transition: { duration: 1.4, ease: exitEase, delay: 0.2 } }}
               />
             </svg>
           )}
 
-          <motion.div exit={{ opacity: 0, transition: { duration: 0.3 } }} style={{ position: "relative" }}>
+          <motion.div exit={{ opacity: 0, transition: { duration: 0.4 } }} style={{ position: "relative" }}>
             <AnimatePresence mode="wait">
               <motion.span
                 key={wordIndex}
                 initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -14, filter: "blur(6px)" }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
                 style={{
                   display: "block",
                   fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
