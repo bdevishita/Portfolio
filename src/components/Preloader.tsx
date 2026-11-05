@@ -114,25 +114,19 @@ export default function Preloader() {
             </svg>
           )}
 
+          {/* Words swap instantly: no fade, blur or slide */}
           <motion.div exit={{ opacity: 0, transition: { duration: 0.4 } }} style={{ position: "relative" }}>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={wordIndex}
-                initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -14, filter: "blur(6px)" }}
-                transition={{ duration: 0.45, ease: "easeOut" }}
-                style={{
-                  display: "block",
-                  fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
-                  fontWeight: 500,
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1,
-                }}
-              >
-                {WORDS[wordIndex]}
-              </motion.span>
-            </AnimatePresence>
+            <span
+              style={{
+                display: "block",
+                fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.2,
+              }}
+            >
+              {WORDS[wordIndex]}
+            </span>
           </motion.div>
         </motion.div>
       )}
