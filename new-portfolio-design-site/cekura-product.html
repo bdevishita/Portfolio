@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cekura Design — Web App &amp; Product Screens · Ishita Dev</title>
+<meta name="description" content="Designing the Cekura web app: results, metrics, billing, onboarding and monitoring screens, and the decisions behind them.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Host+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="index.html">Ishita</a>
+  <a href="index.html#work">Work</a>
+  <a href="index.html#experiments">Lab</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#contact">Contact</a>
+</nav>
+
+<main class="wrap cs">
+  <header class="cs-hero">
+    <p class="mono">Case study · Cekura</p>
+    <h1>Cekura Design: Web App &amp; Product Screens</h1>
+    <p class="sub">How I designed the dashboard of an AI agent testing platform, and the reasoning behind each screen.</p>
+  </header>
+
+  <div class="meta">
+    <div><span class="mono">Role</span><b>Founding Product Designer</b></div>
+    <div><span class="mono">Company</span><b>Cekura (YC F24)</b></div>
+    <div><span class="mono">Timeline</span><b>08.2024 – Present</b></div>
+    <div><span class="mono">Collaborators</span><b>PM, frontend developers</b></div>
+  </div>
+
+  <h2>Context</h2>
+  <p class="body">Cekura lets teams simulate conversations with their voice and chat agents, score results with LLM judges and custom metrics, and monitor production. Users are engineers and QA leads who read a lot of data. The job of every screen is to turn that data into a decision quickly.</p>
+  <p class="body">My process: design in Figma, prototype in HTML/CSS/JS where interaction matters, then hand off to the frontend developer with clear states.</p>
+
+  <h2>Key decisions</h2>
+  <div class="dec">
+    <div class="card">
+      <span class="q">Run result &amp; evaluation overview</span>
+      <h3>Flatten the tabs, promote the rubric</h3>
+      <p>The detail page split metrics into Boolean, Rating and Analysis tabs, which hid results behind clicks. I replaced them with one neutral metrics grid, made the rubric the primary visual focus, and added labeled key-value chips in the header.</p>
+    </div>
+    <div class="card">
+      <span class="q">Trust in LLM judges</span>
+      <h3>Confidence as a visible state</h3>
+      <p>Judge metrics now carry a confidence badge in three tiers, so a reviewer knows what to double-check first.</p>
+      <div><span class="badge hi"><i></i>High</span><span class="badge md"><i></i>Medium</span><span class="badge lo"><i></i>Low</span></div>
+    </div>
+    <div class="card">
+      <span class="q">Connection types</span>
+      <h3>Specific badges over a Voice/Text binary</h3>
+      <p>A UX audit showed "Voice" or "Text" told users almost nothing. I replaced it with the real connection type.</p>
+      <div><span class="badge">Telephony</span><span class="badge">SIP</span><span class="badge">LiveKit</span><span class="badge">Pipecat</span><span class="badge">WebSocket</span></div>
+    </div>
+    <div class="card">
+      <span class="q">Compare transcripts</span>
+      <h3>Two sides, clearly labeled</h3>
+      <p>Client vs. Cekura transcripts are labeled and separated with colored left borders, so differences read at a glance instead of needing a legend.</p>
+    </div>
+    <div class="card">
+      <span class="q">Edit metric</span>
+      <h3>Versioning that feels like version control</h3>
+      <p>Sequential v0 / v1 / v2 labels, inline diffs, a Compare Versions panel and restore/rename modals make it safe to iterate on a metric without fear of losing the old one.</p>
+    </div>
+    <div class="card">
+      <span class="q">Metrics table</span>
+      <h3>Predefined vs. custom, grouped</h3>
+      <p>Group headers with pill labels and count chips separate predefined and custom metrics, so a long table stays scannable.</p>
+    </div>
+  </div>
+
+  <h2>Applying UX laws on the results page</h2>
+  <p class="body">When I redesigned the results page I used named principles as a checklist rather than decoration:</p>
+  <div class="stage">
+    <div class="pill-row">
+      <span class="badge">Hick's Law · fewer choices per view</span>
+      <span class="badge">Von Restorff · one clear highlight</span>
+      <span class="badge">Miller's Law · chunk the data</span>
+      <span class="badge">Fitts's Law · reachable targets</span>
+      <span class="badge">Progressive disclosure · detail on demand</span>
+    </div>
+  </div>
+
+  <h2>More screens</h2>
+  <div class="grid3">
+    <div class="mini"><b>Generate Scenarios</b><p style="color:var(--mute);margin-top:6px">Two-tab panel with chat-style history and a typing indicator.</p><div class="bar"><span style="width:70%"></span></div></div>
+    <div class="mini"><b>Onboarding</b><p style="color:var(--mute);margin-top:6px">Three paths: the UI dashboard, the Cekura Agent, or Claude Code / MCP.</p><div class="bar"><span style="width:45%"></span></div></div>
+    <div class="mini"><b>Billing</b><p style="color:var(--mute);margin-top:6px">Redesigned to elevate the pay-as-you-go auto-refill toggle.</p><div class="bar"><span style="width:85%"></span></div></div>
+    <div class="mini"><b>Pricing upsell</b><p style="color:var(--mute);margin-top:6px">Plan comparison modal at add-user, add-credits and enable-auto-pay, plus a three-column page with a "Popular" badge.</p><div class="bar"><span style="width:60%"></span></div></div>
+    <div class="mini"><b>Monitoring</b><p style="color:var(--mute);margin-top:6px">Dashboards, Slack Alerts, Labs and Cron Jobs screens, with a call drill-down analytics panel.</p><div class="bar"><span style="width:78%"></span></div></div>
+    <div class="mini"><b>Workflow Coverage</b><p style="color:var(--mute);margin-top:6px">Three states finalized: collapsed, expanded full, expanded partial.</p><div class="bar"><span style="width:55%"></span></div></div>
+  </div>
+
+  <h2>How I work</h2>
+  <p class="body"><b>Minimal, brand-faithful, no decoration for its own sake.</b> I prefer a neutral grid with one point of emphasis to a screen where everything competes. Decisions are written down with the question they answer, so developers and the PM can challenge them.</p>
+
+  <div class="next">
+    <a href="cekura-brand.html">← Brand &amp; Visual Identity</a>
+    <a href="index.html#work">All work →</a>
+  </div>
+</main>
+</body>
+</html>
