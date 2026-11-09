@@ -17,7 +17,9 @@ img{display:block;max-width:100%}
 .nav{max-width:1080px;margin:0 auto;padding:22px 24px;display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center}
 .nav a{font-size:14px;font-weight:500;color:var(--mute);transition:color .2s}
 .nav a:hover{color:var(--ink)}
-.nav .brand{margin-right:auto;color:var(--ink);font-weight:600}
+.nav .brand{margin-right:auto;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:10px}
+.nav .brand span{color:var(--mute);font-weight:500}
+.nav .brand .logo{height:20px;width:auto;display:block}
 
 /* hero */
 .hero{padding:72px 0 40px}

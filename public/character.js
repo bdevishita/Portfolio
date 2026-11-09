@@ -208,6 +208,12 @@
     openBtn.setAttribute("aria-haspopup", "dialog");
     dock.appendChild(openBtn);
     createCharacter(openBtn, 72);
+    /* shown on hover and keyboard focus: what the character is and what it does */
+    var tip = h("span", "ch-tip", "I'm " + NAME + ", a small guide to this site. My eyes follow your cursor. Click me to chat and ask about Ishita's work, experience or how to reach her.");
+    tip.id = "ch-tip";
+    tip.setAttribute("role", "tooltip");
+    openBtn.setAttribute("aria-describedby", "ch-tip");
+    dock.appendChild(tip);
 
     /* popup */
     var overlay = h("div", "ch-overlay");

@@ -82,3 +82,13 @@
   .ch-typing i{animation:none}
   .ch-log{scroll-behavior:auto}
 }
+
+/* hover card: what the character is and what it does */
+.ch-tip{position:absolute;right:calc(100% + 12px);bottom:8px;width:240px;padding:14px 16px;border-radius:16px 16px 6px 16px;
+  background:var(--ch-panel);color:var(--ch-text);border:1px solid var(--ch-line);box-shadow:0 12px 36px rgba(0,0,0,.14);
+  font:500 13px/1.45 'Manrope',system-ui,sans-serif;opacity:0;visibility:hidden;translate:6px 0;pointer-events:none;
+  transition:opacity .18s ease,translate .22s cubic-bezier(.24,1.2,.38,1),visibility 0s .18s}
+.ch-open:hover ~ .ch-tip,.ch-open:focus-visible ~ .ch-tip{opacity:1;visibility:visible;translate:0 0;transition-delay:0s}
+@media (hover:none){.ch-tip{display:none}}
+@media (max-width:420px){.ch-tip{width:200px}}
+@media (prefers-reduced-motion: reduce){.ch-tip{transition:none;translate:0 0}}
