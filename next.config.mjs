@@ -18,10 +18,17 @@ const nextConfig = {
     },
 
     async rewrites() {
-        return [
-            // Serve the app from its own deployment, under this path
-            { source: "/labs/daily-brief/live/:path*", destination: `${DAILY_BRIEF_ORIGIN}/:path*` },
-        ];
+        return {
+            // The home page is the static design in /public (index.html)
+            beforeFiles: [
+                { source: "/", destination: "/index.html" },
+                { source: "/about", destination: "/about.html" },
+            ],
+            afterFiles: [
+                // Serve the app from its own deployment, under this path
+                { source: "/labs/daily-brief/live/:path*", destination: `${DAILY_BRIEF_ORIGIN}/:path*` },
+            ],
+        };
     },
 };
 
