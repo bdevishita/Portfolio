@@ -1,16 +1,22 @@
 /* The square character (bottom right) and its chat popup.
    Plain-CSS twin of the EyeTracker in src/components, for the static pages. */
+/* light base; dark follows the system unless light was chosen, or dark was chosen with the switch */
 :root{
   --ch-fill:#141414; --ch-eye:#f6f5f1;
   --ch-panel:#fcfcfb; --ch-bubble:#efeeea; --ch-text:#141414; --ch-mute:#8a8882; --ch-line:#e3e1da;
   --ch-user:#141414; --ch-user-text:#f6f5f1; --ch-veil:rgba(246,245,241,.62);
 }
 @media (prefers-color-scheme: dark){
-  :root{
+  :root:not([data-theme="light"]){
     --ch-fill:#f2f1ec; --ch-eye:#0f0f0e;
     --ch-panel:#171716; --ch-bubble:#242422; --ch-text:#f2f1ec; --ch-mute:#8d8b84; --ch-line:#2c2c29;
     --ch-user:#f2f1ec; --ch-user-text:#0f0f0e; --ch-veil:rgba(15,15,14,.62);
   }
+}
+:root[data-theme="dark"]{
+  --ch-fill:#f2f1ec; --ch-eye:#0f0f0e;
+  --ch-panel:#171716; --ch-bubble:#242422; --ch-text:#f2f1ec; --ch-mute:#8d8b84; --ch-line:#2c2c29;
+  --ch-user:#f2f1ec; --ch-user-text:#0f0f0e; --ch-veil:rgba(15,15,14,.62);
 }
 
 .ch-body{fill:var(--ch-fill)}
