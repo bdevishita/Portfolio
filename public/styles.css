@@ -18,7 +18,6 @@ img{display:block;max-width:100%}
 .nav a{font-size:14px;font-weight:500;color:var(--mute);transition:color .2s}
 .nav a:hover{color:var(--ink)}
 .nav .brand{margin-right:auto;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:10px}
-.nav .brand span{color:var(--mute);font-weight:500}
 .nav .brand .logo{height:20px;width:auto;display:block}
 
 /* hero */
