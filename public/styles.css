@@ -310,3 +310,9 @@ body{overflow-x:clip}
 .ph-e{background:linear-gradient(160deg,#f4d3dc,#d98aa3)}
 .namecard{z-index:10}
 .slide{flex-basis:clamp(300px,38vw,500px)}
+
+/* photo album: click to change, or grab and drag to change */
+.stack{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.stack img{pointer-events:none;-webkit-user-drag:none}
+.stack.dragging{cursor:grabbing}
+.stack.dragging .ph[data-pos="0"]{transition:none;transform:translate(var(--dx,0),var(--dy,0)) rotate(var(--rot,0deg))}

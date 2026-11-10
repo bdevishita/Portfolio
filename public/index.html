@@ -142,7 +142,17 @@ tick();setInterval(tick,1000);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 const stack=document.querySelector('.stack'),cards=[...stack.querySelectorAll('.ph')];
 function swap(){cards.forEach(c=>c.dataset.pos=(+c.dataset.pos+4)%5)}
-stack.addEventListener('click',swap);
+let sx=0,sy=0,down=false,moved=false;
+stack.addEventListener('pointerdown',e=>{if(e.button>0)return;down=true;moved=false;sx=e.clientX;sy=e.clientY;stack.setPointerCapture(e.pointerId)});
+stack.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx,dy=e.clientY-sy;
+  if(!moved&&Math.hypot(dx,dy)>6){moved=true;stack.classList.add('dragging')}
+  if(moved){stack.style.setProperty('--dx',dx+'px');stack.style.setProperty('--dy',dy*.4+'px');stack.style.setProperty('--rot',dx/18+'deg')}});
+function endDrag(e,cancel){if(!down)return;down=false;const dx=e.clientX-sx,dy=e.clientY-sy;
+  stack.classList.remove('dragging');['--dx','--dy','--rot'].forEach(v=>stack.style.removeProperty(v));
+  if(cancel)return;
+  if(!moved||Math.hypot(dx,dy)>70)swap()}
+stack.addEventListener('pointerup',e=>endDrag(e,false));
+stack.addEventListener('pointercancel',e=>endDrag(e,true));
 stack.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();swap()}});
 document.querySelectorAll('.proj').forEach(p=>{
   const tr=p.querySelector('.track'),pv=p.querySelector(".c-prev"),nx=p.querySelector(".c-next");
