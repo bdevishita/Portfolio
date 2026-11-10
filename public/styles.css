@@ -309,3 +309,4 @@ body{overflow-x:clip}
 .ph-d{background:linear-gradient(160deg,#d6ecd9,#7fb98c)}
 .ph-e{background:linear-gradient(160deg,#f4d3dc,#d98aa3)}
 .namecard{z-index:10}
+.slide{flex-basis:clamp(300px,38vw,500px)}
