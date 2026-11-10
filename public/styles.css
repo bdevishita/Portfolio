@@ -222,3 +222,20 @@ body{background-image:radial-gradient(circle,var(--line) 1.2px,transparent 1.4px
 /* Cekura logo is black; flip it in dark mode */
 :root[data-theme="dark"] .cekura{filter:invert(1)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cekura{filter:invert(1)}}
+
+/* hero type: Inter, sizes fixed for desktop and laptop; emphasis in PP Editorial New Italic.
+   PP Editorial New is a licensed font: drop PPEditorialNew-Italic.woff2 into /public/fonts/ to use it.
+   Until then Instrument Serif Italic stands in. */
+@font-face{font-family:'PP Editorial New';font-style:italic;font-weight:400 700;font-display:swap;
+  src:url('/fonts/PPEditorialNew-Italic.woff2') format('woff2'),url('/fonts/PPEditorialNew-Italic.otf') format('opentype')}
+:root{--inter:'Inter',system-ui,sans-serif;--editorial:'PP Editorial New','Instrument Serif',Georgia,serif}
+.hero .lede,.hero .seen,.hero .namecard h1,.hero .namecard p{font-family:var(--inter)}
+.hero .lede{font-size:20px;line-height:1.35;letter-spacing:-.015em}
+.hero .seen{font-size:17px;line-height:1.4;letter-spacing:0}
+.hero .namecard h1{font-size:46px;font-weight:600;letter-spacing:-.035em}
+.hero .namecard p{font-size:16px}
+.hero em,.hero strong,.hero b,.hero i{font-family:var(--editorial);font-style:italic;font-weight:400}
+@media (max-width:820px){
+  .hero .seen{font-size:15px}
+  .hero .namecard h1{font-size:clamp(30px,8vw,40px)}
+}
