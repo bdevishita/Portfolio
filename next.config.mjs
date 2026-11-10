@@ -28,10 +28,6 @@ const nextConfig = {
                 // Serve the app from its own deployment, under this path
                 { source: "/labs/daily-brief/live/:path*", destination: `${DAILY_BRIEF_ORIGIN}/:path*` },
             ],
-            // Anything that matched no page or file gets the tracing-paper 404
-            fallback: [
-                { source: "/:path*", destination: "/not-found.html" },
-            ],
         };
     },
 };
