@@ -316,3 +316,9 @@ body{overflow-x:clip}
 .stack img{pointer-events:none;-webkit-user-drag:none}
 .stack.dragging{cursor:grabbing}
 .stack.dragging .ph[data-pos="0"]{transition:none;transform:translate(var(--dx,0),var(--dy,0)) rotate(var(--rot,0deg))}
+
+/* writing: larger type */
+.wh h2{font-size:clamp(40px,5vw,64px)}
+.wrow h3{font-size:clamp(26px,3.2vw,40px)}
+.wrow p{font-size:18px;max-width:480px}
+@media (max-width:820px){.wrow h3{font-size:24px}.wrow p{font-size:16px}}
