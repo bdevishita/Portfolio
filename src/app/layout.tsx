@@ -3,7 +3,7 @@ import { Inter, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Preloader from "@/components/Preloader";
-import { EyeTracker } from "@/components/EyeTracker";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage" });
@@ -20,13 +20,15 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="dark">
+            <head>
+                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+                <link rel="stylesheet" href="/character.css" />
+            </head>
             <body className={cn(inter.variable, bricolage.variable, "font-sans min-h-screen bg-background text-foreground tracking-tight")}>
                 <Preloader />
                 {children}
-                {/* watches the cursor from the bottom-right corner; within="body" = the whole page */}
-                <div className="eyt-dock">
-                    <EyeTracker size={72} shape="Cube" within="body" />
-                </div>
+                {/* the square character (moods, hover card, chat popup): same file as the static pages */}
+                <Script src="/character.js" strategy="afterInteractive" />
             </body>
         </html>
     );

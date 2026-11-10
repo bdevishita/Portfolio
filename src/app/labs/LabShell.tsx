@@ -1,4 +1,4 @@
-import Link from "next/link";
+import SiteNav from "@/components/SiteNav";
 import type { ReactNode } from "react";
 import "./lab.css";
 
@@ -7,21 +7,7 @@ export default function LabShell({ children }: { children: ReactNode }) {
     return (
         <div className="lab">
             <div className="wrap">
-                <nav aria-label="Primary">
-                    <Link className="logo" href="/">
-                        Ishita Dev
-                    </Link>
-                    <ul>
-                        <li>
-                            <Link href="/">Work</Link>
-                        </li>
-                        <li>
-                            <Link className="on" href="/labs" aria-current="page">
-                                Lab
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
+                <SiteNav current="lab" />
 
                 {children}
 

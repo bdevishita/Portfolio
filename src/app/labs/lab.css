@@ -6,7 +6,22 @@
 .lab .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
 .lab .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* Nav */
+/* Nav: same as the static pages (see src/components/SiteNav.tsx) */
+.lab .site-nav{max-width:none;margin:0;padding:22px 0;display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center;font-family:var(--sans);font-size:14px;font-weight:500;justify-content:flex-start}
+.lab .site-nav a{color:var(--muted);font-family:var(--sans);font-size:14px;font-weight:500;transition:color .2s}
+.lab .site-nav a:hover,.lab .site-nav a.on{color:var(--ink)}
+.lab .site-nav .brand{margin-right:auto;color:var(--ink);display:inline-flex;align-items:center}
+.lab .site-nav .brand .logo{color:var(--ink)}
+.lab .site-nav .logo{height:20px;width:auto;display:block}
+.lab .site-nav .theme-dot{width:28px;height:28px;border:0;background:none;border-radius:50%;display:grid;place-items:center;padding:0;cursor:pointer}
+.lab .site-nav .theme-dot span{display:block;width:14px;height:14px;border-radius:50%;background:var(--muted);transition:transform .2s,background .2s}
+.lab .site-nav .theme-dot:hover span{transform:scale(1.25);background:var(--ink)}
+.lab .site-nav a:focus-visible,.lab .site-nav .theme-dot:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:4px}
+@media(max-width:520px){.lab .site-nav{gap:8px 14px}.lab .site-nav a{font-size:13px}}
+/* dark, when chosen with the switch */
+:root[data-theme="dark"] .lab{--cream:#0f0f0e;--ink:#f2f1ec;--muted:#8d8b84}
+
+/* old nav (unused) */
 .lab nav{display:flex;justify-content:space-between;align-items:center;padding:28px 0;font-family:var(--sans);font-size:14px}
 .lab .logo{font-family:var(--serif);font-size:20px;color:var(--blue)}
 .lab nav ul{display:flex;gap:28px;list-style:none;padding:0}
@@ -44,13 +59,13 @@
 @keyframes lab-slide{0%,20%{transform:translateY(0)}25%,45%{transform:translateY(-1.5em)}50%,70%{transform:translateY(-3em)}75%,95%{transform:translateY(-4.5em)}100%{transform:translateY(-4.5em)}}
 
 /* Presence: a link tapped into being, with rings spreading out and persona chips below */
-.lab .m-presence{background:var(--ink);color:var(--cream);align-content:center;gap:clamp(14px,3%,28px);padding:4%}
+.lab .m-presence{background:#16233a;color:#f4efe6;align-content:center;gap:clamp(14px,3%,28px);padding:4%}
 .lab .pr-tap{position:relative;display:grid;place-items:center;width:100%}
 .lab .pr-ring{position:absolute;left:50%;top:50%;width:clamp(120px,26%,260px);aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(244,239,230,.55);transform:translate(-50%,-50%) scale(.4);opacity:0;animation:lab-ring 4.5s ease-out infinite}
 .lab .pr-ring:nth-child(2){animation-delay:1.5s}
 .lab .pr-ring:nth-child(3){animation-delay:3s}
 @keyframes lab-ring{0%{transform:translate(-50%,-50%) scale(.4);opacity:.9}80%,100%{transform:translate(-50%,-50%) scale(2.6);opacity:0}}
-.lab .pr-link{position:relative;background:var(--cream);color:var(--ink);border-radius:999px;padding:10px 28px;font-size:clamp(16px,2.4vw,28px);letter-spacing:-.02em;white-space:nowrap;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+.lab .pr-link{position:relative;background:#f4efe6;color:#16233a;border-radius:999px;padding:10px 28px;font-size:clamp(16px,2.4vw,28px);letter-spacing:-.02em;white-space:nowrap;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
 .lab .pr-chips{position:relative;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-family:var(--sans);font-size:clamp(11px,1.3vw,14px)}
 .lab .pr-chips span{border:1px solid rgba(244,239,230,.35);border-radius:999px;padding:5px 14px}
 .lab .pr-chips span:first-child{background:var(--blue);border-color:var(--blue)}
