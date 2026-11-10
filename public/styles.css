@@ -297,3 +297,4 @@ body{overflow-x:clip}
 .hero{min-height:calc(100svh - 72px)}
 .seen{display:block}
 .seen .flag{display:inline-block;vertical-align:-4px;margin:0 12px}
+.lede .cekura{height:1.05em;vertical-align:-.12em}
