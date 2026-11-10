@@ -11,132 +11,181 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="/character.css">
 <script src="/character.js" defer></script>
+<style>
+html,body{min-height:100%}
+body.nfp{background:var(--bg);color:var(--ink);font-family:var(--inter,'Inter',system-ui,sans-serif);overflow-x:hidden}
+.nfp .mono,.nfp button,.nfp .tag{font-family:'Geist Mono',ui-monospace,monospace}
+.nfp-page{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding:20px clamp(16px,4vw,56px) 18px}
+.bar{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+.tag,.nfp button.tag{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;line-height:1;padding:11px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;border-radius:2px;white-space:nowrap}
+.tag:hover{border-color:var(--ink)}
+.tag.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tag:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bar .theme-btn{margin-left:4px}
+.nf-row{display:grid;grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:clamp(24px,6vw,96px);align-items:start;padding:36px 0 24px;max-width:1180px;margin:0 auto;width:100%}
+.side .eyebrow{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:22px}
+.side p.copy{font-size:13.5px;line-height:1.55;max-width:300px}
+[data-type="large"] .side p.copy{font-size:16.5px}
+.nf-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;max-width:320px}
+.status{margin-top:20px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.nf-stage{--w:clamp(250px,32vw,400px);position:relative;width:calc(var(--w) * 1.62);max-width:100%;height:calc(var(--w) * 1.36)}
+.sheet{position:absolute;left:0;top:0;width:var(--w);height:calc(var(--w) * 1.3)}
+.archive{background:#f0e9d8;box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 10px 30px rgba(0,0,0,.1)}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .42 0 0 0 0 .28 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E")}
+.sheet svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cap{z-index:3;position:absolute;left:0;top:calc(var(--w) * 1.3 + 8px);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.vellum{background:rgba(255,255,255,.58);backdrop-filter:blur(1.6px);-webkit-backdrop-filter:blur(1.6px);border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 18px 44px rgba(0,0,0,.18);z-index:2;transform:translate(52%,7%);transition:transform .8s cubic-bezier(.3,.9,.3,1)}
+.vellum.laid{transform:none}
+[data-motion="still"] .vellum{transition:none}
+[data-motion="live"] .vellum:not(.laid){animation:drift 6s ease-in-out infinite}
+@keyframes drift{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.vellum svg{touch-action:none;cursor:crosshair;user-select:none;-webkit-user-select:none}
+.vlabel{position:absolute;left:12px;top:10px;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#8a857a;pointer-events:none;z-index:3}
+.vellum .vring{position:absolute;right:12px;top:12px;width:11px;height:11px;border-radius:50%;border:1.5px solid #3a3833;z-index:3;pointer-events:none}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-right:96px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.foot .ctl{display:flex;gap:8px}
+@media (max-width:820px){
+  .nf-row{grid-template-columns:minmax(0,1fr);gap:28px;padding-top:24px}
+  .nf-stage{--w:min(64vw,320px);width:100%;height:calc(var(--w) * 1.36)}
+  .vellum{transform:translate(34%,6%)}
+  .foot{padding-right:84px;flex-wrap:wrap}
+  .bar .tag.hide-s{display:none}
+}
+@media (prefers-reduced-motion:reduce){.vellum{transition:none}[data-motion="live"] .vellum:not(.laid){animation:none}}
+</style>
 </head>
-<body>
-<nav class="nav" aria-label="Primary">
-  <a class="brand" href="/" aria-label="By Ishita Dev"><svg class="logo" viewBox="0 0 222 181" fill="currentColor" aria-hidden="true"><path d="M11.5 180.75C4.75 180.75 2.6077e-08 175.75 2.6077e-08 169.75C2.6077e-08 159 15.5 137.75 15.5 103.25V77.5C15.5 42.75 2.6077e-08 21.5 2.6077e-08 10.75C2.6077e-08 4.74999 4.75 -1.23978e-05 11.5 -1.23978e-05H58C65 -1.23978e-05 69.75 4.74999 69.75 10.75C69.75 21.5 54.25 42.75 54.25 77.5V103.25C54.25 137.75 69.75 159 69.75 169.75C69.75 175.75 65 180.75 58 180.75H11.5ZM148.934 12.75H146.184C128.434 12.75 129.934 67.5 129.934 77.5V103.25C129.934 113 128.434 167.75 146.184 167.75H148.934C163.184 167.75 172.684 136.75 172.684 90.25C172.684 43.75 163.184 12.75 148.934 12.75ZM149.434 180.75H87.1836C80.4336 180.75 75.6836 175.75 75.6836 169.75C75.6836 159 91.1836 137.75 91.1836 103.25V77.5C91.1836 42.75 75.6836 21.5 75.6836 10.75C75.6836 4.74999 80.4336 -1.23978e-05 87.1836 -1.23978e-05H149.434C208.434 -1.23978e-05 221.934 46.25 221.934 90.25C221.934 134.5 208.434 180.75 149.434 180.75Z"/></svg></a>
-  <a href="/#work">Work</a>
-  <a href="/labs">Lab</a>
-  <a href="/writing.html">Writing</a>
-  <a href="/about">About</a>
-  <a href="mailto:b.devishita@gmail.com">Contact</a>
-  <button class="theme-btn" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="dot" aria-hidden="true"></span></button>
-</nav>
-
-<main class="wrap nf">
-  <header class="nf-h">
-    <p class="mono">Error 404</p>
-    <h1>Nothing <em>grows</em> at this address.</h1>
-    <p class="nf-sub" id="nfSub">The page you wanted has drifted away. Trace what is left of it, and the garden will do the rest.</p>
-  </header>
-
-  <figure class="paper">
-    <svg id="nfSvg" viewBox="0 0 400 520" role="img" aria-label="A botanical sprig with leaves, a bud and a bloom, drawn as a dotted outline on tracing paper. Trace it to color it in.">
-      <defs>
-        <filter id="hand" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2"/></filter>
-      </defs>
-      <g id="fills" filter="url(#hand)"></g>
-      <g id="guides" filter="url(#hand)"></g>
-      <g id="ink"></g>
-    </svg>
-    <figcaption><em>Fig. 404</em> &nbsp;·&nbsp; <em>Folium perditum</em>, the lost leaf</figcaption>
-  </figure>
-
-  <div class="nf-actions">
-    <span class="mono" id="nfCount">0 of 8 traced</span>
-    <button type="button" class="nf-btn" id="nfAuto">Color it for me</button>
-    <button type="button" class="nf-btn" id="nfReset">Start over</button>
-    <a class="nf-btn solid" href="/">Back home</a>
+<body class="nfp" data-motion="still" data-type="small">
+<div class="nfp-page">
+  <div class="bar">
+    <a class="tag hide-s" href="/">Home</a>
+    <a class="tag hide-s" href="/writing.html">Writing</a>
+    <a class="tag" href="/#work">The archive &raquo;</a>
+    <button class="theme-btn" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="dot" aria-hidden="true"></span></button>
   </div>
-</main>
 
-<footer>
-  <div class="wrap">
-    <div class="fgrid">
-      <div><h5>Index</h5><a href="/#work">Work</a><a href="/labs">Lab</a><a href="/about">About</a></div>
-      <div><h5>Elsewhere</h5><a href="https://linkedin.com/in/ishita-dev" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:b.devishita@gmail.com">Email</a><a href="https://behance.net/devishita" target="_blank" rel="noopener">Behance</a><a href="https://dribbble.com/b_ishita" target="_blank" rel="noopener">Dribbble</a></div>
-      <div><h5>Based in</h5><span>Varanasi, UP</span></div>
-      <div><h5>About this site</h5><span style="color:var(--mute)">Typeset in Manrope, Host Grotesk &amp; Geist Mono.</span></div>
-    </div>
-    <a class="touch" href="mailto:b.devishita@gmail.com">let’s get in touch</a>
-    <p class="mono" style="margin-top:16px"><span class="dot"></span>Available for new opportunities</p>
-    <p class="fine">Ishita Dev © 2026.</p>
+  <main class="nf-row">
+    <section class="side">
+      <p class="eyebrow mono">Sheet 404 &middot; no such address &middot; tracing</p>
+      <p class="copy">nothing grows at this address. here is a drawing from the garden and a loose sheet of vellum instead: lay the sheet over the drawing, trace its lines in ink, lift it to look, and take the tracing with you. nothing is kept here.</p>
+      <div class="nf-btns">
+        <button class="tag" id="bLay" type="button" aria-pressed="false">Lay the vellum</button>
+        <button class="tag" id="bNew" type="button">New leaf</button>
+        <button class="tag" id="bNext" type="button">Next drawing &raquo;</button>
+        <button class="tag solid" id="bTake" type="button">Take the tracing &darr;</button>
+      </div>
+      <p class="status mono" id="status" aria-live="polite">vellum lifted &middot; lay it to trace</p>
+    </section>
+
+    <section class="nf-stage" aria-label="Drawing and tracing vellum">
+      <div class="sheet archive grain" id="archive"><svg id="art" viewBox="0 0 400 520" role="img" aria-label="Ink drawing from the archive"><g id="artG" filter="url(#hand)"></g></svg></div>
+      <p class="cap mono" id="cap">After &lsquo;The Lost Leaf&rsquo; &middot; the archive</p>
+      <div class="sheet vellum grain" id="vellum">
+        <span class="vlabel mono">Vellum &middot; loose</span><span class="vring"></span>
+        <svg id="trace" viewBox="0 0 400 520" aria-label="Vellum. Draw on it with a mouse or finger."><g id="ink"></g></svg>
+      </div>
+    </section>
+  </main>
+
+  <div class="foot">
+    <span>ishita dev &middot; est. 2026 &middot; sheet 404</span>
+    <span class="ctl"><button class="tag" id="bMotion" type="button" aria-pressed="false">Motion &middot; still</button><button class="tag" id="bType" type="button" aria-label="Larger text">Aa</button></span>
   </div>
-</footer>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="hand" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/></filter></defs></svg>
 
 <script>
 (function(){
-  var NS="http://www.w3.org/2000/svg",svg=document.getElementById("nfSvg"),
-      fills=document.getElementById("fills"),guides=document.getElementById("guides"),ink=document.getElementById("ink"),
-      count=document.getElementById("nfCount"),sub=document.getElementById("nfSub");
-  var SUB0=sub.textContent;
+  var NS="http://www.w3.org/2000/svg",$=function(i){return document.getElementById(i)};
   function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e}
-  /* a slightly uneven petal around the bloom's centre */
-  function petal(deg,k){
-    var cx=200,cy=112,P=[[0,0],[-20,-24],[-21,-52],[0,-60],[21,-52],[20,-24],[0,0]],r=deg*Math.PI/180,c=Math.cos(r),s=Math.sin(r);
+  var INK="#26251f";
+  /* ---------- drawings (ink outlines, as if from an old plate) ---------- */
+  function petal(cx,cy,deg,k){
+    var P=[[0,0],[-20,-24],[-21,-52],[0,-60],[21,-52],[20,-24],[0,0]],r=deg*Math.PI/180,c=Math.cos(r),s=Math.sin(r);
     var q=P.map(function(p){var x=p[0]*k,y=p[1]*k;return [(cx+x*c-y*s).toFixed(1),(cy+x*s+y*c).toFixed(1)]});
     return "M"+q[0]+" C"+q[1]+" "+q[2]+" "+q[3]+" C"+q[4]+" "+q[5]+" "+q[6]+"Z";
   }
-  var PARTS=[
-    {color:"#5f7f55",stroke:true,ds:["M196 500C188 430 214 370 196 310C180 255 212 210 204 152","M198 306C240 300 276 280 296 248"]},
-    {color:"#8fae7a",ds:["M193 420C150 424 112 400 96 362C140 354 182 372 193 420Z"],veins:["M193 420C160 400 128 380 100 364"]},
-    {color:"#6f9a6a",ds:["M198 375C240 372 276 348 288 308C246 308 208 330 198 375Z"],veins:["M198 375C230 350 260 330 286 310"]},
-    {color:"#a3bf8c",ds:["M199 292C160 290 130 262 124 226C164 228 194 252 199 292Z"],veins:["M199 292C170 270 146 250 127 229"]},
-    {color:"#86a974",ds:["M204 215C238 210 262 190 268 160C236 162 210 180 204 215Z"],veins:["M204 215C226 196 246 178 266 162"]},
-    {color:"#d98f9b",ds:["M296 248C282 236 284 214 300 200C316 214 314 236 296 248Z"],veins:["M296 246C297 232 298 218 300 204"]},
-    {color:"#e8a3a3",ds:[[-90,1],[-18,.93],[54,1.06],[126,.96],[198,1.02]].map(function(a){return petal(a[0]+90,a[1])}),veins:[]},
-    {color:"#e2b64f",ds:["M191 112a9 9 0 1 0 18 0a9 9 0 1 0 -18 0Z"]}
+  var DRAW=[
+    {name:"The Lost Leaf",paths:function(){
+      var o=[
+        {d:"M196 500C188 430 214 370 196 310C180 255 212 210 204 152",w:2.2},{d:"M198 306C240 300 276 280 296 248",w:1.8},
+        {d:"M193 420C150 424 112 400 96 362C140 354 182 372 193 420Z"},{d:"M193 420C160 400 128 380 100 364",w:.9},
+        {d:"M198 375C240 372 276 348 288 308C246 308 208 330 198 375Z"},{d:"M198 375C230 350 260 330 286 310",w:.9},
+        {d:"M199 292C160 290 130 262 124 226C164 228 194 252 199 292Z"},{d:"M199 292C170 270 146 250 127 229",w:.9},
+        {d:"M204 215C238 210 262 190 268 160C236 162 210 180 204 215Z"},{d:"M204 215C226 196 246 178 266 162",w:.9},
+        {d:"M296 248C282 236 284 214 300 200C316 214 314 236 296 248Z"},{d:"M296 246C297 232 298 218 300 204",w:.9},
+        {d:"M191 112a9 9 0 1 0 18 0a9 9 0 1 0 -18 0Z"}];
+      [[0,1],[72,.93],[144,1.06],[216,.96],[288,1.02]].forEach(function(a){o.push({d:petal(200,112,a[0],a[1])})});
+      for(var i=0;i<14;i++){var x=150+i*6,y=470+(i%3)*5;o.push({d:"M"+x+" "+y+"l7 -9",w:.7})}
+      return o}},
+    {name:"The Fern",paths:function(){
+      var o=[],pts=[],N=16;
+      for(var i=0;i<=N;i++){var t=i/N;pts.push([200+20*Math.sin(t*3.1),500-420*t])}
+      o.push({d:"M"+pts.map(function(p){return p[0].toFixed(1)+" "+p[1].toFixed(1)}).join("L"),w:2});
+      for(var i=1;i<N;i++){var t=i/N,l=96*Math.pow(1-t,.75)+14,p=pts[i];
+        [-1,1].forEach(function(sd){var x=p[0],y=p[1];
+          o.push({d:"M"+x.toFixed(1)+" "+y.toFixed(1)+"C"+(x+sd*l*.4).toFixed(1)+" "+(y-9)+" "+(x+sd*l*.8).toFixed(1)+" "+(y-24)+" "+(x+sd*l).toFixed(1)+" "+(y-30)+"C"+(x+sd*l*.8).toFixed(1)+" "+(y-8)+" "+(x+sd*l*.4).toFixed(1)+" "+(y+6)+" "+x.toFixed(1)+" "+y.toFixed(1)+"Z"});
+          o.push({d:"M"+x.toFixed(1)+" "+y.toFixed(1)+"Q"+(x+sd*l*.5).toFixed(1)+" "+(y-10)+" "+(x+sd*l*.92).toFixed(1)+" "+(y-27),w:.7})});}
+      o.push({d:"M"+pts[N][0].toFixed(1)+" "+pts[N][1].toFixed(1)+"c-6 -14 -2 -26 8 -30",w:1.6});
+      return o}},
+    {name:"The Clock Flower",paths:function(){
+      var o=[{d:"M204 500C192 430 214 350 200 250",w:2.2},{d:"M196 430C150 420 120 396 108 360C150 358 184 384 196 430Z"},{d:"M196 430C165 408 140 388 112 364",w:.9},
+        {d:"M200 150a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z"}];
+      for(var i=0;i<30;i++){var a=i/30*Math.PI*2,r1=14,r2=70+((i*7)%5)*4,cx=210,cy=150;
+        var x1=cx+Math.cos(a)*r1,y1=cy+Math.sin(a)*r1,x2=cx+Math.cos(a)*r2,y2=cy+Math.sin(a)*r2;
+        o.push({d:"M"+x1.toFixed(1)+" "+y1.toFixed(1)+"L"+x2.toFixed(1)+" "+y2.toFixed(1),w:.8});
+        for(var k=-2;k<=2;k++){var b=a+k*.13;o.push({d:"M"+x2.toFixed(1)+" "+y2.toFixed(1)+"l"+(Math.cos(b)*9).toFixed(1)+" "+(Math.sin(b)*9).toFixed(1),w:.6})}}
+      return o}}
   ];
-  var STEP=6,REACH=13,NEED=0.88;
-  PARTS.forEach(function(p){
-    p.fillEls=[];p.pts=[];p.hit=[];p.done=false;p.veinEls=[];
-    p.ds.forEach(function(d){
-      var f=el("path",{d:d,"class":"nf-fill"});
-      if(p.stroke){f.setAttribute("fill","none");f.setAttribute("stroke",p.color);f.setAttribute("stroke-width","5");f.setAttribute("stroke-linecap","round")}
-      else f.setAttribute("fill",p.color);
-      fills.appendChild(f);p.fillEls.push(f);
-      var g=el("path",{d:d,"class":"nf-guide",fill:"none"});guides.appendChild(g);
-      var L=g.getTotalLength(),n=Math.max(4,Math.round(L/STEP));
-      for(var i=0;i<n;i++){var pt=g.getPointAtLength(L*i/n);p.pts.push([pt.x,pt.y]);p.hit.push(false)}
-    });
-    (p.veins||[]).forEach(function(d){var v=el("path",{d:d,"class":"nf-vein",fill:"none"});fills.appendChild(v);p.veinEls.push(v)});
-  });
-  var doneN=0;
-  function paint(p,on){p.done=on;p.fillEls.concat(p.veinEls).forEach(function(f){f.classList.toggle("on",on)})}
-  function update(){
-    doneN=PARTS.filter(function(p){return p.done}).length;
-    count.textContent=doneN+" of "+PARTS.length+" traced";
-    sub.textContent=doneN===PARTS.length?"There. Something grew after all. Now find your way back home.":SUB0;
+  var cur=0,artG=$("artG"),cap=$("cap");
+  function show(i){
+    cur=(i+DRAW.length)%DRAW.length;artG.innerHTML="";
+    DRAW[cur].paths().forEach(function(p){artG.appendChild(el("path",{d:p.d,fill:"none",stroke:INK,"stroke-width":p.w||1.5,"stroke-linecap":"round","stroke-linejoin":"round",opacity:p.w&&p.w<1?.75:1}))});
+    cap.innerHTML="After &lsquo;"+DRAW[cur].name+"&rsquo; &middot; the archive";
   }
-  function mark(x,y){
-    PARTS.forEach(function(p){
-      if(p.done)return;var h=0;
-      for(var i=0;i<p.pts.length;i++){
-        if(!p.hit[i]){var dx=p.pts[i][0]-x,dy=p.pts[i][1]-y;if(dx*dx+dy*dy<REACH*REACH)p.hit[i]=true}
-        if(p.hit[i])h++;
-      }
-      if(h/p.pts.length>=NEED){paint(p,true);update()}
-    });
-  }
-  function toSvg(e){var pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse())}
-  var down=false,last=null,path=null,d="";
-  svg.addEventListener("pointerdown",function(e){
-    if(e.button>0)return;down=true;svg.setPointerCapture(e.pointerId);
-    last=toSvg(e);d="M"+last.x.toFixed(1)+" "+last.y.toFixed(1);
-    path=el("path",{d:d,"class":"nf-ink"});ink.appendChild(path);mark(last.x,last.y);
+  /* ---------- tracing on the vellum ---------- */
+  var tr=$("trace"),ink=$("ink"),down=false,path=null,d="",last=null;
+  function toSvg(e){var pt=tr.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(tr.getScreenCTM().inverse())}
+  tr.addEventListener("pointerdown",function(e){
+    if(e.button>0)return;down=true;tr.setPointerCapture(e.pointerId);
+    last=toSvg(e);d="M"+last.x.toFixed(1)+" "+last.y.toFixed(1)+"l0.1 0.1";
+    path=el("path",{d:d,fill:"none",stroke:INK,"stroke-width":2.6,"stroke-linecap":"round","stroke-linejoin":"round",opacity:.9});ink.appendChild(path);
   });
-  svg.addEventListener("pointermove",function(e){
-    if(!down)return;var p=toSvg(e);
-    var dx=p.x-last.x,dy=p.y-last.y,dist=Math.hypot(dx,dy),n=Math.max(1,Math.ceil(dist/4));
-    for(var i=1;i<=n;i++)mark(last.x+dx*i/n,last.y+dy*i/n);
-    d+="L"+p.x.toFixed(1)+" "+p.y.toFixed(1);path.setAttribute("d",d);last=p;
+  tr.addEventListener("pointermove",function(e){
+    if(!down)return;var p=toSvg(e);d+="L"+p.x.toFixed(1)+" "+p.y.toFixed(1);path.setAttribute("d",d);last=p;
   });
   function up(){down=false;path=null}
-  svg.addEventListener("pointerup",up);svg.addEventListener("pointercancel",up);
-  document.getElementById("nfAuto").addEventListener("click",function(){PARTS.forEach(function(p){paint(p,true)});update()});
-  document.getElementById("nfReset").addEventListener("click",function(){
-    PARTS.forEach(function(p){paint(p,false);p.hit=p.hit.map(function(){return false})});ink.innerHTML="";update()});
-  update();
+  tr.addEventListener("pointerup",up);tr.addEventListener("pointercancel",up);
+  /* ---------- controls ---------- */
+  var vel=$("vellum"),bLay=$("bLay"),status=$("status");
+  function lay(on){
+    vel.classList.toggle("laid",on);bLay.setAttribute("aria-pressed",on);
+    bLay.textContent=on?"Lift the vellum":"Lay the vellum";
+    status.textContent=on?"vellum laid \u00b7 trace the lines in ink":"vellum lifted \u00b7 lay it to trace";
+  }
+  bLay.addEventListener("click",function(){lay(!vel.classList.contains("laid"))});
+  $("bNew").addEventListener("click",function(){ink.innerHTML=""});
+  $("bNext").addEventListener("click",function(){ink.innerHTML="";show(cur+1)});
+  $("bTake").addEventListener("click",function(){
+    var W=800,H=1040,clone=ink.cloneNode(true);
+    var svgS='<svg xmlns="'+NS+'" width="'+W+'" height="'+H+'" viewBox="0 0 400 520"><rect width="400" height="520" fill="#f7f4ea"/>'+new XMLSerializer().serializeToString(clone)+'</svg>';
+    var img=new Image();
+    img.onload=function(){
+      var c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d");
+      x.drawImage(img,0,0,W,H);x.fillStyle="#8a857a";x.font="18px monospace";x.fillText("ishitadev.com \u00b7 sheet 404",28,H-26);
+      c.toBlob(function(b){var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="tracing-404.png";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000)});
+    };
+    img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svgS);
+  });
+  var body=document.body,bMo=$("bMotion"),rm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  bMo.addEventListener("click",function(){
+    var live=body.getAttribute("data-motion")!=="live";body.setAttribute("data-motion",live?"live":"still");
+    bMo.setAttribute("aria-pressed",live);bMo.innerHTML="Motion &middot; "+(live?"live":"still");
+  });
+  $("bType").addEventListener("click",function(){body.setAttribute("data-type",body.getAttribute("data-type")==="large"?"small":"large")});
+  show(0);
+  if(!rm){setTimeout(function(){body.setAttribute("data-motion","live");bMo.setAttribute("aria-pressed","true");bMo.innerHTML="Motion &middot; live"},50)}
 })();
 </script>
 </body>
