@@ -22,6 +22,24 @@
   var uid = 0;
   var instances = [];
 
+  /* ───────────── moods ─────────────
+     Visitor's own clock:  22:00 to 06:00  asleep (closed eyes, Zzz, slow breathing)
+                           21:00 to 22:00 and 06:00 to 07:00  drowsy (half-closed eyes)
+                           otherwise awake.
+     Hovering it makes it happy (^ ^), or wakes it up if it was asleep.
+     To preview a mood, add ?mood=sleep, drowsy, awake or happy to the page address. */
+  var MOODS = { sleep: 1, drowsy: 1, awake: 1, happy: 1 };
+  function timeMood() {
+    try {
+      var f = new URLSearchParams(window.location.search).get("mood");
+      if (f && MOODS[f] === 1) return f;
+    } catch (e) { /* no URLSearchParams: use the clock */ }
+    var h = new Date().getHours();
+    if (h >= 22 || h < 6) return "sleep";
+    if (h === 21 || h === 6) return "drowsy";
+    return "awake";
+  }
+
   function el(name, attrs) {
     var n = document.createElementNS(NS, name);
     for (var k in attrs) n.setAttribute(k, attrs[k]);
@@ -30,6 +48,7 @@
 
   function createCharacter(host, size, opts) {
     var bottomInset = (opts && opts.bottomInset) || 0; /* units the eyes must stay clear of at the bottom */
+    var awakeOnly = !!(opts && opts.awakeOnly);        /* the chat avatar never sleeps */
     var id = "ch-clip-" + (++uid);
     var svg = el("svg", { viewBox: "0 0 100 100", "class": "ch-svg", width: size, height: size, "aria-hidden": "true" });
     var defs = el("defs", {});
@@ -42,20 +61,41 @@
     var eyes = [0, 1].map(function () {
       var eg = el("g", {});
       eg.appendChild(el("rect", { "class": "ch-eye" }));
+      /* closed / smiling eye: an arc, drawn instead of the rectangle in some moods */
+      eg.appendChild(el("path", { "class": "ch-lid", "stroke-width": "3", "stroke-linecap": "round", fill: "none", style: "display:none" }));
       g.appendChild(eg);
       return eg;
     });
     svg.appendChild(g);
+    /* the Zzz, shown only while asleep */
+    [[76, 18], [86, 9], [95, 0]].forEach(function (p) {
+      var z = el("text", { "class": "ch-z", x: p[0], y: p[1] });
+      z.textContent = "z";
+      svg.appendChild(z);
+    });
     host.appendChild(svg);
 
     var t = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };
+    var aim = { x: 0, y: 0 };                 /* where the pointer is, before the mood adjusts it */
     var blink = 0, nextBlink = performance.now() + 2200;
+    var hover = false, flashMood = "", flashUntil = 0, shown = "";
+    function mood(now) {
+      if (flashUntil > now) return flashMood;
+      var base = awakeOnly ? "awake" : timeMood();
+      if (!hover) return base;
+      return base === "awake" || base === "happy" ? "happy" : "awake"; /* hover wakes it up */
+    }
 
     function draw(now) {
+      var m = mood(now);
+      if (m !== shown) { shown = m; svg.setAttribute("data-mood", m); }
+      var drowsy = m === "drowsy";
+      var arc = m === "sleep" || m === "happy";
       var lid = 1;
-      if (now > nextBlink) { blink = now; nextBlink = now + 2600 + Math.random() * 3200; }
-      var since = now - blink;
-      if (since < 160) lid = 1 - 0.9 * Math.sin((since / 160) * Math.PI);
+      if (now > nextBlink) { blink = now; nextBlink = now + (drowsy ? 1400 + Math.random() * 1800 : 2600 + Math.random() * 3200); }
+      var since = now - blink, blinkMs = drowsy ? 420 : 160;
+      if (since < blinkMs) lid = 1 - 0.9 * Math.sin((since / blinkMs) * Math.PI);
+      if (drowsy) lid = Math.min(lid, 0.55); /* half-closed */
 
       var as = function (v) { return Math.asin(clamp(v, -0.92, 0.92)); };
       var yaw = as(t.x), pitch = -as(t.y);
@@ -74,7 +114,7 @@
         var k = 0.45 + 0.55 * near;
         var sx = k * (0.7 + 0.3 * near);
         var w = EYE.w * sx, hFull = EYE.h * k;
-        return {
+        var o = {
           x: 50 + x1 * R,
           y: 50 + y2 * R * V_GAIN, /* extra vertical gain: reaches the top and bottom sooner */
           w: w, h: Math.max(0.6, hFull * lid),
@@ -82,6 +122,12 @@
           ex: (w / 2) * ca + (hFull / 2) * sa,
           ey: (w / 2) * sa + (hFull / 2) * ca
         };
+        if (arc) { /* an arc is wider than the open eye and only a few units tall */
+          o.aw = w * 1.3;
+          o.ex = o.aw / 2 + 1.6;
+          o.ey = 4.5;
+        }
+        return o;
       });
 
       /* 2. keep both eyes fully inside the face: shift the pair as one, so the gap
@@ -108,12 +154,19 @@
 
       /* 3. draw (the eyes are never hidden, whatever the pointer does) */
       E.forEach(function (e, i) {
-        var eg = eyes[i], rect = eg.firstChild;
-        rect.setAttribute("x", (-e.w / 2).toFixed(2));
-        rect.setAttribute("y", (-e.h / 2).toFixed(2));
-        rect.setAttribute("width", e.w.toFixed(2));
-        rect.setAttribute("height", e.h.toFixed(2));
-        rect.setAttribute("rx", Math.min(EYE.r, e.w / 2, e.h / 2).toFixed(2));
+        var eg = eyes[i], rect = eg.firstChild, lidPath = eg.lastChild;
+        rect.style.display = arc ? "none" : "";
+        lidPath.style.display = arc ? "" : "none";
+        if (arc) {
+          /* asleep: a soft ∪ (closed eye). happy: a ∩ (smiling eye) */
+          lidPath.setAttribute("d", "M" + (-e.aw / 2).toFixed(2) + " 0 Q0 " + (m === "sleep" ? 8 : -8) + " " + (e.aw / 2).toFixed(2) + " 0");
+        } else {
+          rect.setAttribute("x", (-e.w / 2).toFixed(2));
+          rect.setAttribute("y", (-e.h / 2).toFixed(2));
+          rect.setAttribute("width", e.w.toFixed(2));
+          rect.setAttribute("height", e.h.toFixed(2));
+          rect.setAttribute("rx", Math.min(EYE.r, e.w / 2, e.h / 2).toFixed(2));
+        }
         eg.setAttribute("transform", "translate(" + e.x.toFixed(2) + " " + e.y.toFixed(2) + ") rotate(" + tilt.toFixed(2) + ")");
         eg.style.opacity = "1";
       });
@@ -122,6 +175,10 @@
     var inst = {
       svg: svg,
       step: function (now, dt) {
+        /* the mood decides how much the eyes follow the pointer */
+        var m = mood(now);
+        if (m === "sleep") { t.tx = 0; t.ty = 0.2; }            /* eyes closed, face resting */
+        else { var gain = m === "drowsy" ? 0.5 : 1; t.tx = aim.x * gain; t.ty = aim.y * gain; }
         if (reduce) { t.x = t.tx; t.y = t.ty; }
         else {
           var k = 0.06, d = 0.34 - (BOUNCE / 100) * 0.22;
@@ -140,9 +197,12 @@
         /* a shorter reach and a higher cap: the eyes get to full travel with the pointer close by */
         var reach = Math.max(50, Math.min(window.innerWidth, window.innerHeight) * 0.14);
         var far = Math.min(0.92, Math.tanh(d / reach) * (FOLLOW / 60));
-        t.tx = (dx / d) * far; t.ty = (dy / d) * far;
+        aim.x = (dx / d) * far; aim.y = (dy / d) * far;
       },
-      rest: function () { t.tx = 0; t.ty = 0; }
+      rest: function () { aim.x = 0; aim.y = 0; },
+      setHover: function (v) { hover = !!v; },
+      /* show a mood for a moment (e.g. happy after the chat answers) */
+      flash: function (mood2, ms) { flashMood = mood2; flashUntil = performance.now() + ms; }
     };
     instances.push(inst);
     draw(performance.now());
@@ -248,7 +308,11 @@
     openBtn.setAttribute("aria-label", "Chat with " + NAME);
     openBtn.setAttribute("aria-haspopup", "dialog");
     dock.appendChild(openBtn);
-    createCharacter(openBtn, 72);
+    var dockChar = createCharacter(openBtn, 72);
+    openBtn.addEventListener("pointerenter", function () { dockChar.setHover(true); });
+    openBtn.addEventListener("pointerleave", function () { dockChar.setHover(false); });
+    openBtn.addEventListener("focus", function () { dockChar.setHover(true); });
+    openBtn.addEventListener("blur", function () { dockChar.setHover(false); });
     /* shown on hover and keyboard focus: what the character is and what it does */
     var tip = h("span", "ch-tip", "I'm " + NAME + ", a small guide to this site.");
     tip.id = "ch-tip";
@@ -261,7 +325,7 @@
     overlay.hidden = true;
     var wrap = h("div", "ch-wrap");
     var avatar = h("div", "ch-avatar");
-    createCharacter(avatar, 76, { bottomInset: 6 });
+    var chatChar = createCharacter(avatar, 76, { bottomInset: 6, awakeOnly: true });
     var name = h("div", "ch-name", NAME);
     var panel = h("section", "ch-panel");
     panel.setAttribute("role", "dialog");
@@ -365,6 +429,7 @@
       setTimeout(function () {
         typing.remove();
         bubble("bot", a.text, a.links);
+        chatChar.flash("happy", 1600);
         busy = false;
         renderSuggestions();
       }, reduce ? 0 : 520 + Math.min(700, a.text.length * 4));

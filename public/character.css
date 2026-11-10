@@ -98,3 +98,17 @@
 @media (hover:none){.ch-tip{display:none}}
 @media (max-width:420px){.ch-tip{width:200px}}
 @media (prefers-reduced-motion: reduce){.ch-tip{transition:none;translate:0 0}}
+
+/* moods: sleeping at night, drowsy at the edges of it, happy on hover */
+.ch-lid{stroke:var(--ch-eye)}
+.ch-z{fill:var(--ch-text);font:700 13px/1 'Manrope',system-ui,sans-serif;opacity:0;pointer-events:none}
+.ch-svg[data-mood="sleep"] .ch-z{animation:ch-z 3.2s infinite ease-out}
+.ch-svg[data-mood="sleep"] .ch-z:nth-of-type(2){animation-delay:.9s;font-size:16px}
+.ch-svg[data-mood="sleep"] .ch-z:nth-of-type(3){animation-delay:1.8s;font-size:19px}
+@keyframes ch-z{0%{opacity:0;transform:translate(-4px,6px)}25%{opacity:.9}100%{opacity:0;transform:translate(6px,-10px)}}
+.ch-svg[data-mood="sleep"] .ch-body{animation:ch-breathe 4s infinite ease-in-out;transform-origin:50px 100px;transform-box:view-box}
+@keyframes ch-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025,.985)}}
+@media (prefers-reduced-motion: reduce){
+  .ch-svg[data-mood="sleep"] .ch-z{animation:none;opacity:.8}
+  .ch-svg[data-mood="sleep"] .ch-body{animation:none}
+}
