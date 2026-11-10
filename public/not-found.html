@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="/theme.js"></script>
+<title>404 — Ishita Dev</title>
+<meta name="robots" content="noindex"><meta name="description" content="This page wandered off. Trace the drawing to color it in.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Host+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/character.css">
+<script src="/character.js" defer></script>
+</head>
+<body>
+<nav class="nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="By Ishita Dev"><svg class="logo" viewBox="0 0 222 181" fill="currentColor" aria-hidden="true"><path d="M11.5 180.75C4.75 180.75 2.6077e-08 175.75 2.6077e-08 169.75C2.6077e-08 159 15.5 137.75 15.5 103.25V77.5C15.5 42.75 2.6077e-08 21.5 2.6077e-08 10.75C2.6077e-08 4.74999 4.75 -1.23978e-05 11.5 -1.23978e-05H58C65 -1.23978e-05 69.75 4.74999 69.75 10.75C69.75 21.5 54.25 42.75 54.25 77.5V103.25C54.25 137.75 69.75 159 69.75 169.75C69.75 175.75 65 180.75 58 180.75H11.5ZM148.934 12.75H146.184C128.434 12.75 129.934 67.5 129.934 77.5V103.25C129.934 113 128.434 167.75 146.184 167.75H148.934C163.184 167.75 172.684 136.75 172.684 90.25C172.684 43.75 163.184 12.75 148.934 12.75ZM149.434 180.75H87.1836C80.4336 180.75 75.6836 175.75 75.6836 169.75C75.6836 159 91.1836 137.75 91.1836 103.25V77.5C91.1836 42.75 75.6836 21.5 75.6836 10.75C75.6836 4.74999 80.4336 -1.23978e-05 87.1836 -1.23978e-05H149.434C208.434 -1.23978e-05 221.934 46.25 221.934 90.25C221.934 134.5 208.434 180.75 149.434 180.75Z"/></svg></a>
+  <a href="/#work">Work</a>
+  <a href="/labs">Lab</a>
+  <a href="/writing.html">Writing</a>
+  <a href="/about">About</a>
+  <a href="mailto:b.devishita@gmail.com">Contact</a>
+  <button class="theme-btn" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="dot" aria-hidden="true"></span></button>
+</nav>
+
+<main class="wrap nf">
+  <header class="nf-h">
+    <p class="mono">Error 404</p>
+    <h1>This page wandered off.</h1>
+    <p class="nf-sub" id="nfSub">Trace the drawing with your finger or mouse to color it in.</p>
+  </header>
+
+  <div class="paper">
+    <svg id="nfSvg" viewBox="0 0 400 520" role="img" aria-label="A potted flower drawn as a dotted outline. Trace it to color it in.">
+      <g id="fills"></g>
+      <g id="guides"></g>
+      <g id="ink"></g>
+    </svg>
+  </div>
+
+  <div class="nf-actions">
+    <span class="mono" id="nfCount">0 / 8 colored</span>
+    <button type="button" class="nf-btn" id="nfAuto">Color it for me</button>
+    <button type="button" class="nf-btn" id="nfReset">Start over</button>
+    <a class="nf-btn solid" href="/">Back home</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div><h5>Index</h5><a href="/#work">Work</a><a href="/labs">Lab</a><a href="/about">About</a></div>
+      <div><h5>Elsewhere</h5><a href="https://linkedin.com/in/ishita-dev" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:b.devishita@gmail.com">Email</a><a href="https://behance.net/devishita" target="_blank" rel="noopener">Behance</a><a href="https://dribbble.com/b_ishita" target="_blank" rel="noopener">Dribbble</a></div>
+      <div><h5>Based in</h5><span>Varanasi, UP</span></div>
+      <div><h5>About this site</h5><span style="color:var(--mute)">Typeset in Manrope, Host Grotesk &amp; Geist Mono.</span></div>
+    </div>
+    <a class="touch" href="mailto:b.devishita@gmail.com">let’s get in touch</a>
+    <p class="mono" style="margin-top:16px"><span class="dot"></span>Available for new opportunities</p>
+    <p class="fine">Ishita Dev © 2026.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg",svg=document.getElementById("nfSvg"),
+      fills=document.getElementById("fills"),guides=document.getElementById("guides"),ink=document.getElementById("ink"),
+      count=document.getElementById("nfCount"),sub=document.getElementById("nfSub");
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e}
+  /* a petal drawn around the flower's centre, rotated by deg */
+  function petal(deg){
+    var cx=200,cy=150,P=[[0,0],[-14,-30],[-10,-54],[0,-66],[10,-54],[14,-30],[0,0]],r=deg*Math.PI/180,c=Math.cos(r),s=Math.sin(r);
+    var q=P.map(function(p){return [(cx+p[0]*c-p[1]*s).toFixed(1),(cy+p[0]*s+p[1]*c).toFixed(1)]});
+    return "M"+q[0]+" C"+q[1]+" "+q[2]+" "+q[3]+" C"+q[4]+" "+q[5]+" "+q[6]+"Z";
+  }
+  var PARTS=[
+    {name:"rim",   color:"#c4694a",ds:["M132 420H268V442H132Z"]},
+    {name:"pot",   color:"#d9825b",ds:["M142 442H258L248 502Q200 512 152 502Z"]},
+    {name:"stem",  color:"#4f8a5b",ds:["M200 420C190 340 215 270 200 195"],stroke:true},
+    {name:"leaf1", color:"#7cbc84",ds:["M198 345C150 345 118 317 108 281C150 281 188 301 198 345Z"]},
+    {name:"leaf2", color:"#5a9e6a",ds:["M204 305C252 301 286 273 296 237C254 239 214 259 204 305Z"]},
+    {name:"leaf3", color:"#93c98f",ds:["M200 255C160 255 134 231 128 197C164 199 192 217 200 255Z"]},
+    {name:"petals",color:"#f2a6b8",ds:[0,60,120,180,240,300].map(petal)},
+    {name:"center",color:"#f5c84b",ds:["M188 150a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z"]}
+  ];
+  var STEP=6,REACH=13,NEED=0.88,reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  PARTS.forEach(function(p){
+    p.fillEls=[];p.pts=[];p.hit=[];p.done=false;
+    p.ds.forEach(function(d){
+      var f=el("path",{d:d,"class":"nf-fill"});
+      if(p.stroke){f.setAttribute("fill","none");f.setAttribute("stroke",p.color);f.setAttribute("stroke-width","7");f.setAttribute("stroke-linecap","round")}
+      else{f.setAttribute("fill",p.color)}
+      fills.appendChild(f);p.fillEls.push(f);
+      var g=el("path",{d:d,"class":"nf-guide",fill:"none"});guides.appendChild(g);
+      var L=g.getTotalLength(),n=Math.max(4,Math.round(L/STEP));
+      for(var i=0;i<n;i++){var pt=g.getPointAtLength(L*i/n);p.pts.push([pt.x,pt.y]);p.hit.push(false)}
+    });
+  });
+  var doneN=0;
+  function paint(p,on){p.done=on;p.fillEls.forEach(function(f){f.classList.toggle("on",on)})}
+  function update(){
+    doneN=PARTS.filter(function(p){return p.done}).length;
+    count.textContent=doneN+" / "+PARTS.length+" colored";
+    sub.textContent=doneN===PARTS.length?"Nicely traced. Now find your way back home.":"Trace the drawing with your finger or mouse to color it in.";
+  }
+  function mark(x,y){
+    PARTS.forEach(function(p){
+      if(p.done)return;var h=0;
+      for(var i=0;i<p.pts.length;i++){
+        if(!p.hit[i]){var dx=p.pts[i][0]-x,dy=p.pts[i][1]-y;if(dx*dx+dy*dy<REACH*REACH)p.hit[i]=true}
+        if(p.hit[i])h++;
+      }
+      if(h/p.pts.length>=NEED){paint(p,true);update()}
+    });
+  }
+  function toSvg(e){var pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse())}
+  var down=false,last=null,path=null,d="";
+  svg.addEventListener("pointerdown",function(e){
+    if(e.button>0)return;down=true;svg.setPointerCapture(e.pointerId);
+    last=toSvg(e);d="M"+last.x.toFixed(1)+" "+last.y.toFixed(1);
+    path=el("path",{d:d,"class":"nf-ink"});ink.appendChild(path);mark(last.x,last.y);
+  });
+  svg.addEventListener("pointermove",function(e){
+    if(!down)return;var p=toSvg(e);
+    var dx=p.x-last.x,dy=p.y-last.y,dist=Math.hypot(dx,dy),n=Math.max(1,Math.ceil(dist/4));
+    for(var i=1;i<=n;i++)mark(last.x+dx*i/n,last.y+dy*i/n);
+    d+="L"+p.x.toFixed(1)+" "+p.y.toFixed(1);path.setAttribute("d",d);last=p;
+  });
+  function up(){down=false;path=null}
+  svg.addEventListener("pointerup",up);svg.addEventListener("pointercancel",up);
+  document.getElementById("nfAuto").addEventListener("click",function(){PARTS.forEach(function(p){paint(p,true)});update()});
+  document.getElementById("nfReset").addEventListener("click",function(){
+    PARTS.forEach(function(p){paint(p,false);p.hit=p.hit.map(function(){return false})});ink.innerHTML="";update()});
+  update();
+})();
+</script>
+</body>
+</html>
