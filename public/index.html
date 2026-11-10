@@ -32,6 +32,8 @@
         <div class="ph" data-pos="0"><img src="/me.jpg" alt="Ishita Dev"></div>
         <div class="ph ph-b" data-pos="1" aria-hidden="true"><span class="mono">Photo 2</span></div>
         <div class="ph ph-c" data-pos="2" aria-hidden="true"><span class="mono">Photo 3</span></div>
+        <div class="ph ph-d" data-pos="3" aria-hidden="true"><span class="mono">Photo 4</span></div>
+        <div class="ph ph-e" data-pos="4" aria-hidden="true"><span class="mono">Photo 5</span></div>
         <div class="namecard">
           <h1>Ishita Dev</h1>
           <p>is a UI/UX designer</p>
@@ -139,7 +141,7 @@ function tick(){const t=fmt.format(new Date());document.getElementById('clock').
 tick();setInterval(tick,1000);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 const stack=document.querySelector('.stack'),cards=[...stack.querySelectorAll('.ph')];
-function swap(){cards.forEach(c=>c.dataset.pos=(+c.dataset.pos+2)%3)}
+function swap(){cards.forEach(c=>c.dataset.pos=(+c.dataset.pos+4)%5)}
 stack.addEventListener('click',swap);
 stack.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();swap()}});
 document.querySelectorAll('.proj').forEach(p=>{

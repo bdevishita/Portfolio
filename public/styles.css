@@ -299,3 +299,13 @@ body{overflow-x:clip}
 .seen .flag{display:inline-block;vertical-align:-4px;margin:0 12px}
 .lede .cekura{height:1.05em;vertical-align:-.12em}
 .hero-text{padding-left:0}
+
+/* five photos in the album */
+.ph[data-pos="0"]{z-index:5}
+.ph[data-pos="1"]{transform:rotate(-5deg) translate(-8%,3%);z-index:4}
+.ph[data-pos="2"]{transform:rotate(4deg) translate(8%,1%);z-index:3}
+.ph[data-pos="3"]{transform:rotate(-10deg) translate(-15%,5%);z-index:2}
+.ph[data-pos="4"]{transform:rotate(9deg) translate(15%,3%);z-index:1}
+.ph-d{background:linear-gradient(160deg,#d6ecd9,#7fb98c)}
+.ph-e{background:linear-gradient(160deg,#f4d3dc,#d98aa3)}
+.namecard{z-index:10}
