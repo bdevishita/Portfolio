@@ -199,3 +199,26 @@ body{background-image:radial-gradient(circle,var(--line) 1.2px,transparent 1.4px
   .stack{width:min(100%,340px)}
 }
 @media (max-width:520px){.nav{gap:8px 14px;padding:18px 16px}.nav a{font-size:13px}}
+
+/* photo stack swaps on click (hand cursor) */
+.stack{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.stack:focus-visible{outline:2px solid var(--accent);outline-offset:8px;border-radius:16px}
+.ph{transition:transform .5s cubic-bezier(.24,1.2,.38,1)}
+.ph[data-pos="0"]{transform:none;z-index:3}
+.ph[data-pos="1"]{transform:rotate(-5deg) translate(-9%,3%);z-index:2}
+.ph[data-pos="2"]{transform:rotate(4deg) translate(9%,1%);z-index:1}
+.ph-b{background:linear-gradient(160deg,#cdd8f5,#8fa8e0)}
+.ph-c{background:linear-gradient(160deg,#e8d9c4,#b9a283)}
+.ph .mono{position:absolute;left:14px;top:12px;color:#fff;mix-blend-mode:normal;opacity:.8}
+.seen{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.seen .flag{display:inline-block;border-radius:5px}
+.lede .cekura{display:inline-block;height:.78em;width:auto;vertical-align:-.04em;margin:0 .15em}
+.socials{display:flex;gap:12px;margin-top:4px}
+.socials a{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--line);color:var(--ink);transition:transform .2s,background .2s}
+.socials a:hover{transform:translateY(-2px);background:var(--mute);color:var(--bg)}
+.socials a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.ph{transition:none}}
+
+/* Cekura logo is black; flip it in dark mode */
+:root[data-theme="dark"] .cekura{filter:invert(1)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cekura{filter:invert(1)}}
