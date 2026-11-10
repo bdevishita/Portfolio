@@ -14,6 +14,9 @@
   var EYE = { w: 9, h: 15, r: 4.5 };
   var CUBE = "M30 6 H70 A24 24 0 0 1 94 30 V70 A24 24 0 0 1 70 94 H30 A24 24 0 0 1 6 70 V30 A24 24 0 0 1 30 6 Z";
   var FOLLOW = 60, BOUNCE = 30;
+  var V_GAIN = 1.3;                       /* vertical travel multiplier */
+  var BOUNDS_MIN = 6, BOUNDS_MAX = 94;    /* the face, in viewBox units */
+  var MARGIN = 4;                         /* eyes keep this much clear of the edge */
   var reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
   var uid = 0;
@@ -25,7 +28,8 @@
     return n;
   }
 
-  function createCharacter(host, size) {
+  function createCharacter(host, size, opts) {
+    var bottomInset = (opts && opts.bottomInset) || 0; /* units the eyes must stay clear of at the bottom */
     var id = "ch-clip-" + (++uid);
     var svg = el("svg", { viewBox: "0 0 100 100", "class": "ch-svg", width: size, height: size, "aria-hidden": "true" });
     var defs = el("defs", {});
@@ -57,8 +61,10 @@
       var yaw = as(t.x), pitch = -as(t.y);
       var cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
       var tilt = TILT * t.x * t.y;
-      [-GAP, GAP].forEach(function (x0, i) {
-        var eg = eyes[i];
+      var rad = tilt * Math.PI / 180, ca = Math.abs(Math.cos(rad)), sa = Math.abs(Math.sin(rad));
+
+      /* 1. where each eye would sit on the sphere, and how big it looks */
+      var E = [-GAP, GAP].map(function (x0) {
         var z0 = Math.sqrt(1 - x0 * x0);
         var x1 = x0 * cy + z0 * sy;
         var z1 = -x0 * sy + z0 * cy;
@@ -67,15 +73,49 @@
         var near = clamp(z2, 0, 1);
         var k = 0.45 + 0.55 * near;
         var sx = k * (0.7 + 0.3 * near);
-        var w = EYE.w * sx, h = Math.max(0.6, EYE.h * k * lid);
-        var rect = eg.firstChild;
-        rect.setAttribute("x", (-w / 2).toFixed(2));
-        rect.setAttribute("y", (-h / 2).toFixed(2));
-        rect.setAttribute("width", w.toFixed(2));
-        rect.setAttribute("height", h.toFixed(2));
-        rect.setAttribute("rx", Math.min(EYE.r, w / 2, h / 2).toFixed(2));
-        eg.setAttribute("transform", "translate(" + (50 + x1 * R).toFixed(2) + " " + (50 + y2 * R).toFixed(2) + ") rotate(" + tilt.toFixed(2) + ")");
-        eg.style.opacity = z2 < 0.05 ? "0" : "1";
+        var w = EYE.w * sx, hFull = EYE.h * k;
+        return {
+          x: 50 + x1 * R,
+          y: 50 + y2 * R * V_GAIN, /* extra vertical gain: reaches the top and bottom sooner */
+          w: w, h: Math.max(0.6, hFull * lid),
+          /* half-size of the (tilted) eye at full height, so a blink never moves it */
+          ex: (w / 2) * ca + (hFull / 2) * sa,
+          ey: (w / 2) * sa + (hFull / 2) * ca
+        };
+      });
+
+      /* 2. keep both eyes fully inside the face: shift the pair as one, so the gap
+            between them is kept, then pull each eye out of the rounded corners */
+      var lo = BOUNDS_MIN + MARGIN, hi = BOUNDS_MAX - MARGIN;
+      var shiftAxis = function (key, half, hiLimit) {
+        var a = Math.min(E[0][key] - E[0][half], E[1][key] - E[1][half]);
+        var b = Math.max(E[0][key] + E[0][half], E[1][key] + E[1][half]);
+        var s = b > hiLimit ? hiLimit - b : (a < lo ? lo - a : 0);
+        if (b - a > hiLimit - lo) s = (lo + hiLimit) / 2 - (a + b) / 2;
+        E[0][key] += s; E[1][key] += s;
+      };
+      shiftAxis("x", "ex", hi);
+      shiftAxis("y", "ey", hi - bottomInset); /* the popup's name chip covers the bottom edge */
+      E.forEach(function (e) {
+        if ((e.x < 30 || e.x > 70) && (e.y < 30 || e.y > 70)) {
+          var ccx = e.x < 30 ? 30 : 70, ccy = e.y < 30 ? 30 : 70;
+          var dx = e.x - ccx, dy = e.y - ccy, s = 1, room = 24 - MARGIN;
+          while (s > 0 && Math.hypot(Math.abs(dx) * s + e.ex, Math.abs(dy) * s + e.ey) > room) s -= 0.02;
+          e.x = ccx + dx * Math.max(0, s);
+          e.y = ccy + dy * Math.max(0, s);
+        }
+      });
+
+      /* 3. draw (the eyes are never hidden, whatever the pointer does) */
+      E.forEach(function (e, i) {
+        var eg = eyes[i], rect = eg.firstChild;
+        rect.setAttribute("x", (-e.w / 2).toFixed(2));
+        rect.setAttribute("y", (-e.h / 2).toFixed(2));
+        rect.setAttribute("width", e.w.toFixed(2));
+        rect.setAttribute("height", e.h.toFixed(2));
+        rect.setAttribute("rx", Math.min(EYE.r, e.w / 2, e.h / 2).toFixed(2));
+        eg.setAttribute("transform", "translate(" + e.x.toFixed(2) + " " + e.y.toFixed(2) + ") rotate(" + tilt.toFixed(2) + ")");
+        eg.style.opacity = "1";
       });
     }
 
@@ -97,8 +137,9 @@
         var dx = e.clientX - (r.left + r.width / 2);
         var dy = e.clientY - (r.top + r.height / 2);
         var d = Math.hypot(dx, dy) || 1;
-        var reach = Math.max(60, Math.min(window.innerWidth, window.innerHeight) * 0.28);
-        var far = Math.min(0.85, Math.tanh(d / reach) * (FOLLOW / 100) * 1.5);
+        /* a shorter reach and a higher cap: the eyes get to full travel with the pointer close by */
+        var reach = Math.max(50, Math.min(window.innerWidth, window.innerHeight) * 0.14);
+        var far = Math.min(0.92, Math.tanh(d / reach) * (FOLLOW / 60));
         t.tx = (dx / d) * far; t.ty = (dy / d) * far;
       },
       rest: function () { t.tx = 0; t.ty = 0; }
@@ -220,7 +261,7 @@
     overlay.hidden = true;
     var wrap = h("div", "ch-wrap");
     var avatar = h("div", "ch-avatar");
-    createCharacter(avatar, 76);
+    createCharacter(avatar, 76, { bottomInset: 6 });
     var name = h("div", "ch-name", NAME);
     var panel = h("section", "ch-panel");
     panel.setAttribute("role", "dialog");
