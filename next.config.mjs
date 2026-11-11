@@ -23,6 +23,8 @@ const nextConfig = {
             beforeFiles: [
                 { source: "/", destination: "/index.html" },
                 { source: "/about", destination: "/about.html" },
+                // Cranky Crab's Happy Day: the full-screen book reader (static, lives in /public/cranky-crab)
+                { source: "/labs/cranky-crab/read", destination: "/cranky-crab/index.html" },
             ],
             afterFiles: [
                 // Serve the app from its own deployment, under this path

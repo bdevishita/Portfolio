@@ -67,6 +67,16 @@ function PresenceVisual() {
     );
 }
 
+function CrankyCrabVisual() {
+    return (
+        <div className="media m-crab" aria-hidden="true">
+            <img className="crab-bg" src="/cranky-crab/img/s1l.webp" alt="" loading="lazy" />
+            <img className="crab-cover" src="/cranky-crab/img/cover.webp" alt="" loading="lazy" />
+            <img className="crab-pop" src="/cranky-crab/img/c-cover.webp" alt="" loading="lazy" />
+        </div>
+    );
+}
+
 /**
  * To add an experiment, append an entry here. It appears on /labs automatically
  * and gets its own page at /labs/<slug>.
@@ -172,6 +182,45 @@ export const EXPERIMENTS: Experiment[] = [
             },
         ],
         visual: <PresenceVisual />,
+    },
+    {
+        slug: "cranky-crab",
+        title: "Cranky Crab's Happy Day",
+        meta: "Children's picture book · client project · 2026",
+        tagline: "A picture book about a grumpy crab who finds out that a little friendship makes a very big difference, shown as a book you can open and read.",
+        liveUrl: "/labs/cranky-crab/read",
+        liveLabel: "Open the book",
+        facts: [
+            { label: "Year", value: "2026" },
+            { label: "Type", value: "Client project, picture book" },
+            { label: "Format", value: "Square pages, read as two-page spreads" },
+            { label: "Status", value: "Delivered" },
+        ],
+        sections: [
+            {
+                heading: "What it is",
+                paragraphs: [
+                    "Cranky Crab's Happy Day is a short children's picture book. A lonely crab frowns at everything in the sea, until he meets another crab and finds out that crabs can be happy too.",
+                    "The book here is built from the finished page art: a cover, seven two-page spreads and a back cover.",
+                ],
+            },
+            {
+                heading: "How the book reads",
+                bullets: [
+                    "Each wide frame is two pages, one left and one right, so the page turn follows the spine of a real book.",
+                    "Click or tap the right page to go forward and the left page to go back. Drag sideways, press the arrow keys, or use the buttons.",
+                    "The crab lifts off the page with a soft shadow and tilts toward your pointer, a small pop-up on top of the flat art.",
+                    "Words are set in big, rounded type with sound words in yellow (Grump! Whoosh! Clomp!), so a parent can read them out loud.",
+                ],
+            },
+            {
+                heading: "The story in short",
+                paragraphs: [
+                    "Cranky Crab is grumpy about the noisy clownfish and even the dancing seaweed. One day he decides he cannot be cranky any more and walks across the ridge to explore. On the other side another crab waves hello, and the two play together all day.",
+                ],
+            },
+        ],
+        visual: <CrankyCrabVisual />,
     },
 ];
 
