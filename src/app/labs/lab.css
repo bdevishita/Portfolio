@@ -145,12 +145,10 @@
   .lab .dg i:nth-child(-n+37){background:#fff}
 }
 
-/* Cranky Crab card: closed book with the crab popping off the cover */
+/* Cranky Crab card: closed book  */
 .lab .m-crab{background:#0b4f7a;perspective:900px;overflow:hidden}
 .lab .m-crab .crab-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:blur(2px) saturate(1.1)}
 .lab .m-crab .crab-cover{position:relative;height:84%;aspect-ratio:1/1;border-radius:6px 10px 10px 6px;box-shadow:0 18px 34px rgba(0,15,35,.5);transform:rotateY(-16deg) rotateX(4deg);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.lab .m-crab .crab-pop{position:absolute;left:50%;top:50%;height:46%;width:auto;transform:translate(-62%,-4%) rotateY(-16deg) translateZ(50px);filter:drop-shadow(0 12px 10px rgba(0,15,35,.5));transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .lab .item:hover .m-crab .crab-cover{transform:rotateY(-6deg) rotateX(2deg)}
-.lab .item:hover .m-crab .crab-pop{transform:translate(-62%,-12%) rotateY(-6deg) translateZ(70px)}
 .lab .hero .m-crab .crab-cover{height:88%}
-@media(prefers-reduced-motion:reduce){.lab .m-crab .crab-cover,.lab .m-crab .crab-pop{transition:none}}
+@media(prefers-reduced-motion:reduce){.lab .m-crab .crab-cover{transition:none}}

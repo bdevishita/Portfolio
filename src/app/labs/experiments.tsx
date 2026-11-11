@@ -72,7 +72,6 @@ function CrankyCrabVisual() {
         <div className="media m-crab" aria-hidden="true">
             <img className="crab-bg" src="/cranky-crab/img/s1l.webp" alt="" loading="lazy" />
             <img className="crab-cover" src="/cranky-crab/img/cover.webp" alt="" loading="lazy" />
-            <img className="crab-pop" src="/cranky-crab/img/c-cover.webp" alt="" loading="lazy" />
         </div>
     );
 }
@@ -209,7 +208,7 @@ export const EXPERIMENTS: Experiment[] = [
                 bullets: [
                     "Each wide frame is two pages, one left and one right, so the page turn follows the spine of a real book.",
                     "Click or tap the right page to go forward and the left page to go back. Drag sideways, press the arrow keys, or use the buttons.",
-                    "The crab lifts off the page with a soft shadow and tilts toward your pointer, a small pop-up on top of the flat art.",
+                    "The pages turn around a spine, like a real book.",
                     "Words are set in big, rounded type with sound words in yellow (Grump! Whoosh! Clomp!), so a parent can read them out loud.",
                 ],
             },
