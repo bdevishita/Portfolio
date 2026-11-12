@@ -48,36 +48,42 @@
       <p class="bn-big">Five internships. One founding role.</p>
     </article>
 
-    <article class="bn-t bn-shelf">
-      <span class="bn-l mono">Bookshelf</span>
-      <div class="bn-books" id="books" role="list"></div>
-      <p class="bn-cap" id="bookCap" aria-live="polite">Pick a book</p>
-    </article>
-
-    <article class="bn-t bn-snaps">
-      <span class="bn-l mono">Photography</span>
-      <button class="bn-folder" id="folder" type="button" aria-expanded="false" aria-label="Open the photography folder">
-        <span class="back"></span>
-        <span class="pic p1"></span><span class="pic p2"></span><span class="pic p3"></span>
-        <span class="front"></span>
-      </button>
-      <p class="bn-cap" id="folderCap">Tap to open the folder</p>
-    </article>
-
-    <article class="bn-t bn-music">
-      <span class="bn-l mono">Music I like</span>
-      <div class="bn-art" id="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="bn-track"><b id="trk">Song title</b><span id="art-by">Artist</span></div>
-      <div class="bn-ctl"><span class="mono" id="trkNo">1 / 4</span><button type="button" id="nextTrack" aria-label="Next song">Next →</button></div>
-    </article>
   </section>
+
+  <section class="hb" id="hobbies" aria-label="Hobbies">
+    <div class="hb-top">
+      <article class="hb-card hb-shelf">
+        <h2>My bookshelf</h2>
+        <div class="hb-shelves" id="shelves"></div>
+        <p class="hb-cap" id="bookCap" aria-live="polite">Pick a book</p>
+      </article>
+      <article class="hb-card hb-music">
+        <div class="hb-head"><h2>Music I like</h2><button type="button" class="hb-pill" id="moreMusic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5M3 21v-5h5"/></svg>Load more</button></div>
+        <div class="hb-albums" id="albums" role="list"></div>
+        <div class="hb-now"><b id="trk">Song title</b><span id="art-by">Artist</span></div>
+      </article>
+    </div>
+    <article class="hb-card hb-photos">
+      <div class="hb-head"><h2>My photography</h2></div>
+      <div class="hb-folders" id="folders"></div>
+    </article>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="s-cam" viewBox="0 0 48 48"><rect x="4" y="12" width="40" height="28" rx="6" fill="#5b6270"/><rect x="14" y="7" width="12" height="7" rx="2" fill="#5b6270"/><circle cx="24" cy="26" r="9" fill="#e9ecf2"/><circle cx="24" cy="26" r="5.5" fill="#2f3440"/><circle cx="37" cy="18" r="2" fill="#ff8a5c"/></symbol>
+      <symbol id="s-film" viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="36" rx="5" fill="#d9573a"/><rect x="12" y="12" width="24" height="24" rx="2" fill="#f4b9a6"/><path d="M12 32l7-9 5 6 4-4 8 7v4H12z" fill="#b8402a"/><circle cx="30" cy="19" r="3" fill="#fff"/></symbol>
+      <symbol id="s-sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="9" fill="#f2b84b"/><g stroke="#f2b84b" stroke-width="3.5" stroke-linecap="round"><path d="M24 5v6M24 37v6M5 24h6M37 24h6M10.6 10.6l4.2 4.2M33.2 33.2l4.2 4.2M10.6 37.4l4.2-4.2M33.2 14.8l4.2-4.2"/></g></symbol>
+      <symbol id="s-leaf" viewBox="0 0 48 48"><path d="M8 40C8 20 20 8 42 8c0 22-12 34-30 32z" fill="#4faa7a"/><path d="M10 38C20 26 28 20 38 12" stroke="#2f7f58" stroke-width="2.5" stroke-linecap="round" fill="none"/></symbol>
+      <symbol id="s-pin" viewBox="0 0 48 48"><path d="M24 4c-8 0-14 6-14 14 0 10 14 26 14 26s14-16 14-26c0-8-6-14-14-14z" fill="#3a8fb7"/><circle cx="24" cy="18" r="5.5" fill="#fff"/></symbol>
+      <symbol id="s-heart" viewBox="0 0 48 48"><path d="M24 42S6 31 6 18a10 10 0 0 1 18-6 10 10 0 0 1 18 6c0 13-18 24-18 24z" fill="#e0553b"/></symbol>
+    </svg>
+  </section>
+
 
   <section class="qa">
     <div class="sec-h"><h2>questions</h2></div>
     <div class="qa-row"><h3>What's your main thing?</h3><p>Product design for complex software: user research, systems, and the details of a single interaction. I like taking a dense workflow and making it feel obvious.</p></div>
     <div class="qa-row"><h3>What are you working on now?</h3><p>I'm the Founding Product Designer at Cekura AI (YC F24), designing the testing and observability product for AI agents.</p></div>
     <div class="qa-row"><h3>How did you get here?</h3><p>Five internships and one founding role: a study-abroad platform, websites and brand work, a logo and product UI for an early startup, then product design from zero at Cekura. I also won the Plexus designathon.</p></div>
-    <div class="qa-row"><h3>What do you do outside design?</h3><p>I read, listen to a lot of music and take photographs. The shelf, the playlist and the folder above are the short version.</p></div>
+    <div class="qa-row"><h3>What do you do outside design?</h3><p>I read, listen to a lot of music and take photographs. The shelf, the albums and the folders above are the short version.</p></div>
     <div class="qa-row"><h3>Where are you based?</h3><p>Varanasi, India. Open to new opportunities.</p></div>
     <div class="qa-row"><h3>How can I get in touch?</h3><p><a href="mailto:b.devishita@gmail.com">b.devishita@gmail.com</a>, or find me on <a href="https://linkedin.com/in/ishita-dev" target="_blank" rel="noopener">LinkedIn</a>.</p></div>
   </section>
@@ -129,34 +135,47 @@
 </footer>
 <script>
 (function(){
-  /* Edit these three lists to change what shows in the bento tiles. */
+  /* Edit these lists to change what shows in Hobbies. Colours are placeholders until real covers and photos are added. */
   var BOOKS=[
-    ['Book title','Author','#2d6dc3',92],['Book title','Author','#e0553b',108],['Book title','Author','#f2b84b',84],['Book title','Author','#2f8f6b',100],['Book title','Author','#7a4fb5',90],['Book title','Author','#141414',104],
-    ['Book title','Author','#d96a9a',96],['Book title','Author','#3a8fb7',86],['Book title','Author','#c4743a',106],['Book title','Author','#5b6770',92],['Book title','Author','#2d6dc3',100],['Book title','Author','#e0553b',88]
+    ['Book title','Author','#2f4a8a'],['Book title','Author','#d8442f'],['Book title','Author','#f0efe9'],['Book title','Author','#16181d'],['Book title','Author','#e9b43c'],
+    ['Book title','Author','#2f8f6b'],['Book title','Author','#7a4fb5'],['Book title','Author','#cf6fa0'],['Book title','Author','#3a8fb7'],['Book title','Author','#c4743a']
   ];
-  var TRACKS=[
-    ['Song title','Artist','linear-gradient(145deg,#2d6dc3,#7a4fb5 60%,#e0553b)'],
-    ['Song title','Artist','linear-gradient(145deg,#2f8f6b,#3a8fb7 60%,#141414)'],
-    ['Song title','Artist','linear-gradient(145deg,#e0553b,#f2b84b 60%,#d96a9a)'],
-    ['Song title','Artist','linear-gradient(145deg,#141414,#5b6770 60%,#2d6dc3)']
+  var ALBUMS=['#2d6dc3,#7a4fb5','#e0553b,#f2b84b','#16181d,#5b6770','#2f8f6b,#3a8fb7','#d96a9a,#7a4fb5','#f2b84b,#c4743a','#3a8fb7,#16181d','#7a4fb5,#e0553b','#4faa7a,#f2b84b'];
+  var FOLDERS=[
+    ['Folder name','Photos coming soon','s-pin','s-sun',['#9ec5e8,#e8d7b9','#f0b9a4,#c9a3d6','#a7d8b8,#f4e2a0']],
+    ['Folder name','Photos coming soon','s-leaf','s-heart',['#f4d6a0,#e0a0a0','#a0c0e8,#c0e0d0','#d0b0e0,#f0d0b0']],
+    ['Folder name','Photos coming soon','s-sun','s-pin',['#b0d8c0,#e8e0a0','#e8b0b0,#b0b8e8','#c0d8f0,#f0e0c0']],
+    ['Other photos','Photos coming soon','s-cam','s-film',['#c8c0b0,#8aa0b8','#e0c8a0,#a0b8a0','#b8b0c8,#e8d0c0']]
   ];
-  var wrap=document.getElementById('books'),cap=document.getElementById('bookCap'),on=null;
-  if(wrap){
-    [BOOKS.slice(0,6),BOOKS.slice(6)].forEach(function(row){
-      var r=document.createElement('div');r.className='bn-row';
-      row.forEach(function(b){
-        var el=document.createElement('button');el.type='button';el.className='bn-book';el.textContent=b[0];
-        el.style.cssText='background:'+b[2]+';height:'+b[3]+'px;width:'+(26+(b[3]%5)*3)+'px';
-        el.setAttribute('role','listitem');el.setAttribute('aria-label',b[0]+' by '+b[1]);
-        el.onclick=function(){if(on)on.classList.remove('on');on=el;el.classList.add('on');cap.textContent=b[0]+' · '+b[1]};
-        r.appendChild(el)});
-      wrap.appendChild(r)});
-  }
-  var f=document.getElementById('folder'),fc=document.getElementById('folderCap');
-  if(f)f.onclick=function(){var o=f.getAttribute('aria-expanded')==='true';f.setAttribute('aria-expanded',String(!o));fc.textContent=o?'Tap to open the folder':'Photos coming soon'};
-  var i=0,t=document.getElementById('trk'),a=document.getElementById('art-by'),n=document.getElementById('trkNo'),art=document.getElementById('art');
-  var nb=document.getElementById('nextTrack');
-  if(nb)nb.onclick=function(){i=(i+1)%TRACKS.length;t.textContent=TRACKS[i][0];a.textContent=TRACKS[i][1];n.textContent=(i+1)+' / '+TRACKS.length;art.style.background=TRACKS[i][2]};
+  function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!==undefined)e.innerHTML=h;return e}
+
+  var sh=document.getElementById('shelves'),cap=document.getElementById('bookCap'),on=null;
+  if(sh){[BOOKS.slice(0,5),BOOKS.slice(5)].forEach(function(row){
+    var r=el('div','hb-row'),bks=el('div','hb-books');
+    row.forEach(function(b,k){
+      var d=el('button','hb-book');d.type='button';d.setAttribute('aria-label',b[0]+' by '+b[1]);
+      var light=b[2]==='#f0efe9';
+      d.style.cssText='background:'+b[2]+';color:'+(light?'#16181d':'#fff')+';height:'+[88,100,92,96,90][k%5]+'%';
+      d.innerHTML='<i>'+b[0]+'</i><em>'+b[1]+'</em>';
+      d.onclick=function(){if(on)on.classList.remove('on');on=d;d.classList.add('on');cap.textContent=b[0]+' · '+b[1]};
+      bks.appendChild(d)});
+    r.appendChild(bks);r.appendChild(el('div','hb-board'));sh.appendChild(r)})}
+
+  var al=document.getElementById('albums'),off=0,trk=document.getElementById('trk'),by=document.getElementById('art-by');
+  function paint(){al.innerHTML='';ALBUMS.forEach(function(_,k){
+    var c=ALBUMS[(k+off)%ALBUMS.length],d=el('button','hb-al','<span></span>');d.type='button';d.setAttribute('role','listitem');d.setAttribute('aria-label','Album '+(k+1));
+    d.style.background='linear-gradient(145deg,'+c+')';d.style.zIndex=k;
+    d.onmouseenter=d.onfocus=function(){trk.textContent='Song title';by.textContent='Artist · album '+(k+1)};
+    al.appendChild(d)})}
+  if(al){paint();document.getElementById('moreMusic').onclick=function(){off=(off+3)%ALBUMS.length;paint()}}
+
+  var fo=document.getElementById('folders');
+  if(fo)FOLDERS.forEach(function(f){
+    var w=el('div','hb-fw'),b=el('button','hb-f');b.type='button';b.setAttribute('aria-label',f[0]);
+    var ph='';f[4].forEach(function(g,i){ph+='<span class="ph p'+(i+1)+'" style="background:linear-gradient(135deg,'+g+')"></span>'});
+    b.innerHTML='<span class="bk"></span>'+ph+'<span class="fr"><svg width="38" height="38"><use href="#'+f[2]+'"/></svg><svg width="38" height="38"><use href="#'+f[3]+'"/></svg></span>';
+    w.appendChild(b);w.appendChild(el('b','',f[0]));w.appendChild(el('span','hb-count',f[1]));fo.appendChild(w)});
+
   var c=document.getElementById('aboutClock');
   if(c){var fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
     (function tick(){c.textContent=fmt.format(new Date())+' IST';setTimeout(tick,1000)})()}
