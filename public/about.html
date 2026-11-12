@@ -26,28 +26,61 @@
 <main class="wrap">
   <header class="page-h"><h1>About</h1></header>
 
-  <div class="about">
-    <div>
-      <p class="lead">I'm a UI/UX &amp; Product Designer obsessed with dismantling complexity. <span>Currently building the future as a Founding Designer at Cekura AI (YC F24).</span></p>
-      <p style="color:var(--mute);margin-top:20px">My process relies on rigorous user research, iterative data analysis, and a relentless pursuit of the perfect micro-interaction. I believe the best products aren't just usable—they're memorable.</p>
-      <div class="stats">
-        <div class="stat"><b>02+</b><span class="mono">Years Exp.</span></div>
-        <div class="stat"><b>YC</b><span class="mono">Founding Designer</span></div>
-        <div class="stat"><b>Plexus</b><span class="mono">Award · Designathon Winner</span></div>
-      </div>
-      <p class="mono" style="margin-top:20px">Disciplinary spectrum: UX · UI · 3D</p>
-    </div>
-    <div>
-      <h3 style="font-family:var(--grot);font-size:22px;letter-spacing:-.03em;margin-bottom:6px">Skills &amp; Arsenal</h3>
-      <p style="color:var(--mute);margin-bottom:22px;font-size:15px">A comprehensive toolkit combining deep user empathy, strategic product thinking, and precise visual execution.</p>
-      <div class="skills">
-        <div><h4>UX Design</h4><div class="chips"><span class="chip">User Research</span><span class="chip">Information Architecture</span><span class="chip">Rapid Prototyping</span><span class="chip">Wireframes</span><span class="chip">Prototypes</span><span class="chip">Usability Testing</span><span class="chip">Storyboarding</span><span class="chip">Affinity diagram</span><span class="chip">User flow</span><span class="chip">Journey mapping</span></div></div>
-        <div><h4>Product</h4><div class="chips"><span class="chip">Design Sprints</span><span class="chip">Product Thinking</span><span class="chip">Data Analysis</span><span class="chip">SCAMPER</span><span class="chip">A/B Testing</span><span class="chip">SWOT Analysis</span></div></div>
-        <div><h4>Visual Design</h4><div class="chips"><span class="chip">Typography</span><span class="chip">Layout</span><span class="chip">Grid System</span><span class="chip">Color Theory</span><span class="chip">Logo Design</span><span class="chip">Brand Identity</span><span class="chip">Responsive Design</span><span class="chip">Micro interactions</span><span class="chip">Carousels</span><span class="chip">Mockups</span></div></div>
-        <div><h4>Tools &amp; Tech</h4><div class="chips"><span class="chip">Figma</span><span class="chip">Figjam</span><span class="chip">Notion</span><span class="chip">Adobe Photoshop</span><span class="chip">Adobe Illustrator</span><span class="chip">Adobe Indesign</span><span class="chip">Adobe XD</span><span class="chip">Spline</span><span class="chip">Dora</span><span class="chip">Autocad</span><span class="chip">Fusion 360</span><span class="chip">Adobe Premiere Pro</span></div></div>
-      </div>
-    </div>
-  </div>
+  <section class="bn" aria-label="A bit about me">
+    <article class="bn-t bn-intro">
+      <p class="bn-lead">I'm a UI/UX &amp; Product Designer obsessed with dismantling complexity. <span>Currently building the future as a Founding Designer at Cekura AI (YC F24).</span></p>
+      <p class="bn-sub">My process relies on rigorous user research, iterative data analysis, and a relentless pursuit of the perfect micro-interaction. I believe the best products aren't just usable—they're memorable.</p>
+      <p class="mono bn-spec">Disciplinary spectrum: UX · UI · 3D</p>
+    </article>
+
+    <figure class="bn-t bn-portrait">
+      <div class="bn-ph" role="img" aria-label="Portrait photo placeholder"><span class="mono">Portrait<br>coming soon</span></div>
+    </figure>
+
+    <article class="bn-t bn-where">
+      <span class="bn-l mono">Based in</span>
+      <p class="bn-big"><img src="/india-flag.svg" width="22" height="22" alt="India"> Varanasi</p>
+      <p class="mono bn-clock" id="aboutClock">--:--:--</p>
+    </article>
+
+    <article class="bn-t bn-count">
+      <span class="bn-l mono">So far</span>
+      <p class="bn-big">Five internships. One founding role.</p>
+    </article>
+
+    <article class="bn-t bn-shelf">
+      <span class="bn-l mono">Bookshelf</span>
+      <div class="bn-books" id="books" role="list"></div>
+      <p class="bn-cap" id="bookCap" aria-live="polite">Pick a book</p>
+    </article>
+
+    <article class="bn-t bn-snaps">
+      <span class="bn-l mono">Photography</span>
+      <button class="bn-folder" id="folder" type="button" aria-expanded="false" aria-label="Open the photography folder">
+        <span class="back"></span>
+        <span class="pic p1"></span><span class="pic p2"></span><span class="pic p3"></span>
+        <span class="front"></span>
+      </button>
+      <p class="bn-cap" id="folderCap">Tap to open the folder</p>
+    </article>
+
+    <article class="bn-t bn-music">
+      <span class="bn-l mono">Music I like</span>
+      <div class="bn-art" id="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="bn-track"><b id="trk">Song title</b><span id="art-by">Artist</span></div>
+      <div class="bn-ctl"><span class="mono" id="trkNo">1 / 4</span><button type="button" id="nextTrack" aria-label="Next song">Next →</button></div>
+    </article>
+  </section>
+
+  <section class="qa">
+    <div class="sec-h"><h2>questions</h2></div>
+    <div class="qa-row"><h3>What's your main thing?</h3><p>Product design for complex software: user research, systems, and the details of a single interaction. I like taking a dense workflow and making it feel obvious.</p></div>
+    <div class="qa-row"><h3>What are you working on now?</h3><p>I'm the Founding Product Designer at Cekura AI (YC F24), designing the testing and observability product for AI agents.</p></div>
+    <div class="qa-row"><h3>How did you get here?</h3><p>Five internships and one founding role: a study-abroad platform, websites and brand work, a logo and product UI for an early startup, then product design from zero at Cekura. I also won the Plexus designathon.</p></div>
+    <div class="qa-row"><h3>What do you do outside design?</h3><p>I read, listen to a lot of music and take photographs. The shelf, the playlist and the folder above are the short version.</p></div>
+    <div class="qa-row"><h3>Where are you based?</h3><p>Varanasi, India. Open to new opportunities.</p></div>
+    <div class="qa-row"><h3>How can I get in touch?</h3><p><a href="mailto:b.devishita@gmail.com">b.devishita@gmail.com</a>, or find me on <a href="https://linkedin.com/in/ishita-dev" target="_blank" rel="noopener">LinkedIn</a>.</p></div>
+  </section>
 
   <section>
     <div class="sec-h"><h2>experience</h2></div>
@@ -58,6 +91,26 @@
     <div class="exp-row"><span class="mono">10.2022 – 11.2022</span><div><h3>Flecks Labs</h3><div class="role">UI/UX Designer</div><p>Successfully crafted a distinctive company logo and pioneered the user interface design for an innovative goods transportation app, Shippers and Truckers.</p></div></div>
     <div class="exp-row"><span class="mono">08.2022 – 11.2022</span><div><h3>Braynix</h3><div class="role">UI/UX Designer</div><p>Conducted research and led the design efforts for the comprehensive interface of the event management app, Festa. Additionally designed the interface for the pet care app, Pawzsible.</p></div></div>
     <div class="exp-row"><span class="mono">09.2021 – 11.2021</span><div><h3>ASY</h3><div class="role">Graphic Designer</div><p>Creating visually engaging materials for online and offline platforms. Develop promotional materials and social media content to enhance company image.</p></div></div>
+  </section>
+
+  <section class="tm">
+    <div class="sec-h"><h2>kind words</h2></div>
+    <div class="tm-grid">
+      <figure class="tm-card"><span class="tm-tag mono">Placeholder</span><blockquote>Add a real quote here from a teammate, manager or client.</blockquote><figcaption><b>Name</b><span>Role, Company</span></figcaption></figure>
+      <figure class="tm-card"><span class="tm-tag mono">Placeholder</span><blockquote>A sentence or two about what it was like to work with you.</blockquote><figcaption><b>Name</b><span>Role, Company</span></figcaption></figure>
+      <figure class="tm-card"><span class="tm-tag mono">Placeholder</span><blockquote>Specific is better: what changed because of your work.</blockquote><figcaption><b>Name</b><span>Role, Company</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><h2>skills &amp; arsenal</h2></div>
+    <p style="color:var(--mute);margin-bottom:22px;font-size:15px">A comprehensive toolkit combining deep user empathy, strategic product thinking, and precise visual execution.</p>
+      <div class="skills">
+        <div><h4>UX Design</h4><div class="chips"><span class="chip">User Research</span><span class="chip">Information Architecture</span><span class="chip">Rapid Prototyping</span><span class="chip">Wireframes</span><span class="chip">Prototypes</span><span class="chip">Usability Testing</span><span class="chip">Storyboarding</span><span class="chip">Affinity diagram</span><span class="chip">User flow</span><span class="chip">Journey mapping</span></div></div>
+        <div><h4>Product</h4><div class="chips"><span class="chip">Design Sprints</span><span class="chip">Product Thinking</span><span class="chip">Data Analysis</span><span class="chip">SCAMPER</span><span class="chip">A/B Testing</span><span class="chip">SWOT Analysis</span></div></div>
+        <div><h4>Visual Design</h4><div class="chips"><span class="chip">Typography</span><span class="chip">Layout</span><span class="chip">Grid System</span><span class="chip">Color Theory</span><span class="chip">Logo Design</span><span class="chip">Brand Identity</span><span class="chip">Responsive Design</span><span class="chip">Micro interactions</span><span class="chip">Carousels</span><span class="chip">Mockups</span></div></div>
+        <div><h4>Tools &amp; Tech</h4><div class="chips"><span class="chip">Figma</span><span class="chip">Figjam</span><span class="chip">Notion</span><span class="chip">Adobe Photoshop</span><span class="chip">Adobe Illustrator</span><span class="chip">Adobe Indesign</span><span class="chip">Adobe XD</span><span class="chip">Spline</span><span class="chip">Dora</span><span class="chip">Autocad</span><span class="chip">Fusion 360</span><span class="chip">Adobe Premiere Pro</span></div></div>
+      </div>
   </section>
 </main>
 
@@ -74,5 +127,40 @@
     <p class="fine">Ishita Dev © 2026.</p>
   </div>
 </footer>
+<script>
+(function(){
+  /* Edit these three lists to change what shows in the bento tiles. */
+  var BOOKS=[
+    ['Book title','Author','#2d6dc3',92],['Book title','Author','#e0553b',108],['Book title','Author','#f2b84b',84],['Book title','Author','#2f8f6b',100],['Book title','Author','#7a4fb5',90],['Book title','Author','#141414',104],
+    ['Book title','Author','#d96a9a',96],['Book title','Author','#3a8fb7',86],['Book title','Author','#c4743a',106],['Book title','Author','#5b6770',92],['Book title','Author','#2d6dc3',100],['Book title','Author','#e0553b',88]
+  ];
+  var TRACKS=[
+    ['Song title','Artist','linear-gradient(145deg,#2d6dc3,#7a4fb5 60%,#e0553b)'],
+    ['Song title','Artist','linear-gradient(145deg,#2f8f6b,#3a8fb7 60%,#141414)'],
+    ['Song title','Artist','linear-gradient(145deg,#e0553b,#f2b84b 60%,#d96a9a)'],
+    ['Song title','Artist','linear-gradient(145deg,#141414,#5b6770 60%,#2d6dc3)']
+  ];
+  var wrap=document.getElementById('books'),cap=document.getElementById('bookCap'),on=null;
+  if(wrap){
+    [BOOKS.slice(0,6),BOOKS.slice(6)].forEach(function(row){
+      var r=document.createElement('div');r.className='bn-row';
+      row.forEach(function(b){
+        var el=document.createElement('button');el.type='button';el.className='bn-book';el.textContent=b[0];
+        el.style.cssText='background:'+b[2]+';height:'+b[3]+'px;width:'+(26+(b[3]%5)*3)+'px';
+        el.setAttribute('role','listitem');el.setAttribute('aria-label',b[0]+' by '+b[1]);
+        el.onclick=function(){if(on)on.classList.remove('on');on=el;el.classList.add('on');cap.textContent=b[0]+' · '+b[1]};
+        r.appendChild(el)});
+      wrap.appendChild(r)});
+  }
+  var f=document.getElementById('folder'),fc=document.getElementById('folderCap');
+  if(f)f.onclick=function(){var o=f.getAttribute('aria-expanded')==='true';f.setAttribute('aria-expanded',String(!o));fc.textContent=o?'Tap to open the folder':'Photos coming soon'};
+  var i=0,t=document.getElementById('trk'),a=document.getElementById('art-by'),n=document.getElementById('trkNo'),art=document.getElementById('art');
+  var nb=document.getElementById('nextTrack');
+  if(nb)nb.onclick=function(){i=(i+1)%TRACKS.length;t.textContent=TRACKS[i][0];a.textContent=TRACKS[i][1];n.textContent=(i+1)+' / '+TRACKS.length;art.style.background=TRACKS[i][2]};
+  var c=document.getElementById('aboutClock');
+  if(c){var fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    (function tick(){c.textContent=fmt.format(new Date())+' IST';setTimeout(tick,1000)})()}
+})();
+</script>
 </body>
 </html>
